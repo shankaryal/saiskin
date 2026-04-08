@@ -15,7 +15,7 @@ export default function Home() {
       <section 
         className="relative min-h-[80vh] sm:min-h-screen bg-cover flex items-center justify-center text-white overflow-hidden"
         style={{
-          backgroundImage: 'url("/src/assets/hm.jpg")',
+          backgroundImage: 'url("/images/hm.jpg")',
           backgroundPosition: '50% center',
         }}
       >

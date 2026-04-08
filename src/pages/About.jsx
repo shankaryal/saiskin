@@ -42,7 +42,7 @@ export default function About() {
               {/* Replace with actual clinic/founder image */}
               <div className="aspect-[4/5] bg-zinc-100 rounded-[3rem] overflow-hidden shadow-2xl">
                 <img 
-                  src="/src/assets/about.jpg" 
+                  src="/images/about.jpg" 
                   alt="Sai Care Clinic Interior"
                   className="w-full h-full object-cover"
                 />

@@ -7,7 +7,7 @@ export const allTreatments = [
     shortDesc: "Soprano Titanium Special Edition – virtually painless hair removal on all skin types.",
     fullDesc: "Soprano Titanium Special Edition combines ultimate functionality with ICE cold comfort for smarter, faster and virtually painless hair removal on all skin types.",
     slug: "laser-hair-removal",
-    image: "/src/assets/laser.jpg",
+    image: "/images/laser.jpg",
     duration: "30 min", 
     price: "£30"
   },
@@ -16,7 +16,7 @@ export const allTreatments = [
     shortDesc: "Harmony XL Pro Special Edition IPL for vascular & pigmented lesions.",
     fullDesc: "Harmony XL Pro Special Edition IPL is light based attachment that uses narrow spectrum wavelengths to treat broad areas of vascular & pigmented lesions.",
     slug: "dye-svl-dye-vl-are-ipl",
-    image: "/src/assets/dye.jpg",
+    image: "/images/dye.jpg",
     duration: "30 min", 
     price: "£30"
   },
@@ -25,7 +25,7 @@ export const allTreatments = [
     shortDesc: "Pure, non-irritating ingredients safe enough to be repeated as needed.",
     fullDesc: "We use only the purest, non-irritating medical-grade peels that are safe enough to be repeated as needed to address any skin concern.",
     slug: "chemical-peels",
-    image: "/src/assets/chemical.jpg",
+    image: "/images/chemical.jpg",
     duration: "30 min", 
     price: "£30"
   },
@@ -34,49 +34,49 @@ export const allTreatments = [
     shortDesc: "LED Phototherapy to replenish, rejuvenate and repair your skin.",
     fullDesc: "Replenish, rejuvenate and repair your skin with relaxing light treatment for an instant facelift effect.",
     slug: "dermalux-tri-wave-md",
-    image: "/src/assets/dermalux.png"
+    image: "/images/dermalux.png"
   },
   { 
     title: "Bespoke Facials", 
     shortDesc: "Thorough deep cleanse, gentle exfoliation and personalised care.",
     fullDesc: "This includes a thorough deep cleanse, gentle exfoliation, and the use of a facial steamer to open pores.",
     slug: "bespoke-facials",
-    image: "/src/assets/facial.jpg"
+    image: "/images/facial.jpg"
   },
   { 
     title: "Skin Analyser Zemits", 
     shortDesc: "Advanced skin analysis technology for personalised treatment plans.",
     fullDesc: "Aesthetic Consultations with Skin Analysis Technology for accurate diagnosis and personalised treatment plans.",
     slug: "skin-analyser-zemits",
-    image: "/src/assets/analysis.png"
+    image: "/images/analysis.png"
   },
   { 
     title: "Clear Lift", 
     shortDesc: "Non-ablative laser for skin tightening and rejuvenation.",
     fullDesc: "ClearLift is the most popular Harmony treatment. Award winning & repeatedly viral on TikTok – referred to as the lunchtime face lift.",
     slug: "clear-lift",
-    image: "/src/assets/clearlift.png"
+    image: "/images/clearlift.png"
   },
   { 
     title: "Clear Skin", 
     shortDesc: "Target acne and blemishes effectively.",
     fullDesc: "ClearSkin is an award winning laser treatment designed to treat oily skin and all forms of acne, whilst also having a gentle skin rejuvenating effect.",
     slug: "clear-skin",
-    image: "/src/assets/clear_skin.png"
+    image: "/images/clear_skin.png"
   },
   { 
     title: "Tattoo Removal", 
     shortDesc: "Safe and effective laser tattoo removal.",
     fullDesc: "Laser tattoo removal treatments offer a safe and precise solution for erasing unwanted tattoos.",
     slug: "tattoo-removal",
-    image: "/src/assets/Tattoo-removal.jpg"
+    image: "/images/Tattoo-removal.jpg"
   },
   { 
     title: "iPixel", 
     shortDesc: "Fractional laser resurfacing for scars and skin texture improvement.",
     fullDesc: "The iPixel is a highly effective fractional ablative skin resurfacing treatment procedure that uses an Erbium YAG laser with a 2940nm wavelength.",
     slug: "ipixel",
-    image: "/src/assets/ipixel.jpg"
+    image: "/images/ipixel.jpg"
   },
 ];
 

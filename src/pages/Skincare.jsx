@@ -20,7 +20,7 @@ export default function Skincare() {
       size: "74g",
       price: "£57.00",
       brand: "CosMedix",
-      image: "/src/assets/detox.jpg",
+      image: "/images/detox.jpg",
       description: "A powerful detoxifying mask that draws out impurities and toxins while gently exfoliating the skin. Ideal for congested and dull skin.",
       ingredients: "Activated Charcoal, Kaolin Clay, Aloe Vera, Diatomaceous Earth",
       howToUse: "Apply a thin layer to clean, dry skin. Leave on for 10-15 minutes. Use 1-3 times weekly."
@@ -32,7 +32,7 @@ export default function Skincare() {
       size: "50g",
       price: "£42.75",
       brand: "CosMedix",
-      image: "/src/assets/Rescue.jpg",
+      image: "/images/Rescue.jpg",
       description: "Intensive hydrating balm and mask that rescues dry, irritated skin with antioxidant-rich cherry extract.",
       ingredients: "Cherry Extract, Shea Butter, Hyaluronic Acid, Willow Herb",
       howToUse: "As a mask: Apply a thick layer for 15 minutes. As a balm: Massage into irritated areas."
@@ -44,7 +44,7 @@ export default function Skincare() {
       size: "60 ml",
       price: "£56.00",
       brand: "CosMedix",
-      image: "/src/assets/Rescue.jpg",
+      image: "/images/Rescue.jpg",
       description: "A refreshing Cranberry Enzyme Mask that gently exfoliates and detoxifies the skin.",
       ingredients: "Papaya Enzyme, Pineapple Enzyme, Cranberry, L-Lactic Acid",
       howToUse: "Apply to clean, damp skin. Leave on for 3-10 minutes. Use 1-2 times per week."
@@ -56,8 +56,8 @@ export default function Skincare() {
       size: "150 ml",
       price: "£38.00",
       brand: "CosMedix",
-      // image: "/src/assets/products/gentle-clean.jpg",
-      image: "/src/assets/Rescue.jpg",
+      // image: "/images/products/gentle-clean.jpg",
+      image: "/images/Rescue.jpg",
       description: "A gentle yet effective cleanser that removes makeup and impurities without stripping moisture.",
       ingredients: "Aloe Vera, Green Tea, Chamomile, Sodium Hyaluronate",
       howToUse: "Massage a small amount onto damp face. Rinse with lukewarm water. Use morning and night."
@@ -69,8 +69,8 @@ export default function Skincare() {
       size: "150 ml",
       price: "£36.50",
       brand: "CosMedix",
-      image: "/src/assets/Rescue.jpg",
-      // image: "/src/assets/products/benefit-clean.jpg",
+      image: "/images/Rescue.jpg",
+      // image: "/images/products/benefit-clean.jpg",
       description: "Daily gentle cleanser suitable for all skin types, including sensitive and post-operative skin.",
       ingredients: "Herbal Amaranth, Sandalwood, Grapefruit Peel Oil",
       howToUse: "Apply to wet hands and massage into a lather. Massage over face and neck."
@@ -82,7 +82,7 @@ export default function Skincare() {
       size: "60 ml",
       price: "£48.00",
       brand: "CosMedix",
-      image: "/src/assets/Rescue.jpg",
+      image: "/images/Rescue.jpg",
       description: "A non-greasy, antioxidant-rich daily moisturiser with broad-spectrum SPF 30 protection.",
       ingredients: "Zinc Oxide (Physical Sunscreen), Vitamin E, Olive Leaf Extract",
       howToUse: "Apply liberally 15 minutes before sun exposure. Reapply at least every 2 hours."
