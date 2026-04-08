@@ -32,7 +32,7 @@ export default function Navbar() {
           <Link to="/" className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <div className="w-9 h-9 sm:w-11 sm:h-11 md:w-13 md:h-13 rounded-full overflow-hidden border-2 border-gold shrink-0">
               <img 
-                src="/src/assets/logo.png" 
+                src="/images/logo.png" 
                 alt="Sai Care" 
                 className="w-full h-full object-cover"
               />
