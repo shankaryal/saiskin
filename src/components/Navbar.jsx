@@ -1,156 +1,279 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ChevronDown, ChevronUp, Menu, X } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, ChevronUp, ChevronDown } from 'lucide-react';
+import { CLINIC } from '../constants';
+
+const TREATMENT_LINKS = [
+  { label: 'Laser Hair Removal',  slug: 'laser-hair-removal'   },
+  { label: 'Chemical Peels',      slug: 'chemical-peels'       },
+  { label: 'Bespoke Facials',     slug: 'bespoke-facials'      },
+  { label: 'Skin Analyser',       slug: 'skin-analyser-zemits' },
+  { label: 'Tattoo Removal',      slug: 'tattoo-removal'       },
+  { label: 'iPixel',              slug: 'ipixel'               },
+];
+
+// Home lai paila rakhne gari array order milako
+const NAV_LINKS = [
+  { label: 'Home',      to: '/'      },
+  { label: 'Skincare',  to: '/skincare'   },
+  { label: 'Price List', to: '/price-list' },
+  { label: 'About',      to: '/about'      },
+  { label: 'Contact',    to: '/contact'    },
+];
 
 export default function Navbar() {
-  const [treatmentsOpen, setTreatmentsOpen] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileTreatmentsOpen, setMobileTreatmentsOpen] = useState(false);
+  const [mobileOpen,   setMobileOpen]   = useState(false);
+  const [dropOpen,     setDropOpen]     = useState(false);
+  const [mobileTxOpen, setMobileTxOpen] = useState(false);
+  const [scrolled,     setScrolled]     = useState(false);
 
-  const treatmentsList = [
-    "Laser Hair Removal", 
-    "Chemical Peels", 
-    "Bespoke Facials", 
-    "Skin Analyser", 
-    "Tattoo Removal", 
-    "iPixel"
-  ];
+  const location = useLocation();
+  const dropRef  = useRef(null);
+  const isHome   = location.pathname === '/';
 
-  const bookingLink = "https://ivmedispa.eu.zenoti.com/webstoreNew";
+  /* scroll detection */
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 30);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  /* close dropdown on outside click */
+  useEffect(() => {
+    const handler = (e) => {
+      if (dropRef.current && !dropRef.current.contains(e.target)) setDropOpen(false);
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  /* close everything on route change */
+  useEffect(() => {
+    setMobileOpen(false);
+    setDropOpen(false);
+    setMobileTxOpen(false);
+  }, [location]);
+
+  const isTreatmentActive =
+    location.pathname === '/treatments' ||
+    location.pathname.startsWith('/treatment/');
+
+  const transparent = isHome && !scrolled && !mobileOpen;
 
   return (
-    <header className="sticky top-0 z-50 bg-black text-white shadow-md w-full">
-      {/* Special Offer Bar */}
-      {/* <div className="bg-gold text-black py-2 text-center text-[10px] sm:text-xs font-bold uppercase tracking-widest">
-        Indulge in exclusive care – <strong>50% OFF any courses of 6</strong>
-      </div> */}
+    <header
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-400 ${
+        transparent
+          ? 'bg-transparent'
+          : 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100'
+      }`}
+      role="banner"
+    >
+      <nav className="max-w-7xl mx-auto px-6 md:px-10 flex items-center h-[68px]" aria-label="Main navigation">
 
-      <nav className="relative max-w-[1440px] mx-auto px-3 sm:px-4 py-3">
-        <div className="flex items-center justify-between gap-1">
+        {/* Logo */}
+        <Link
+  to="/"
+  className="flex items-center gap-2 sm:gap-3 shrink-0 group"
+  aria-label="Sai Care Home"
+>
+  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-gold shrink-0 transition-transform group-hover:scale-105">
+    <img 
+      src="/images/logo.png" 
+      alt="" 
+      className="w-full h-full object-cover"
+    />
+  </div>
+  <span 
+    className="font-serif text-2xl font-semibold transition-colors"
+    style={{ color: transparent ? '#ffffff' : '#0d0d0d' }}
+  >
+    Sai<span className="text-gold">Care</span>
+  </span>
+</Link>
+        {/* Desktop links */}
+        <ul className="hidden md:flex items-center gap-1 flex-1 justify-center" role="list">
           
-          {/* Logo Section */}
-          <Link to="/" className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-            <div className="w-9 h-9 sm:w-11 sm:h-11 md:w-13 md:h-13 rounded-full overflow-hidden border-2 border-gold shrink-0">
-              <img 
-                src="/images/logo.png" 
-                alt="Sai Care" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="flex flex-col justify-center">
-              <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-tight text-gold leading-tight">
-                Sai Care
-              </span>
-              <span className="text-[6px] sm:text-[8px] md:text-[9px] tracking-wider text-gray-400 uppercase whitespace-nowrap">
-                Skin and Hair Care
-              </span>
-            </div>
-          </Link>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center justify-end flex-1 gap-1.5 lg:gap-5 xl:gap-8 text-[10px] lg:text-[13px] xl:text-[15px] font-bold tracking-tight">
-            <Link to="/" className="hover:text-gold transition px-1">HOME</Link>
-
-            {/* TREATMENTS DROPDOWN - Fixed Hover Logic */}
-            <div 
-              className="relative py-3" // This py-3 acts as the bridge so the menu doesn't close
-              onMouseEnter={() => setTreatmentsOpen(true)}
-              onMouseLeave={() => setTreatmentsOpen(false)}
+          {/* 1. Sabai bhanda paila Home link */}
+          <li>
+            <Link
+              to="/"
+              className={`px-4 py-2 text-sm font-medium transition-colors rounded-lg ${
+                transparent
+                  ? location.pathname === '/' ? 'text-gold' : 'text-white/90 hover:text-white'
+                  : location.pathname === '/' ? 'text-gold' : 'text-[#0d0d0d] hover:text-gold'
+              }`}
             >
-              <button className="flex items-center gap-0.5 hover:text-gold transition uppercase px-1">
-                TREATMENTS 
-                <ChevronDown size={10} className={`lg:size-4 transition-transform ${treatmentsOpen ? 'rotate-180' : ''}`} />
-              </button>
-              
-              {treatmentsOpen && (
-                <div className="absolute left-0 top-full mt-[-5px] w-52 bg-white text-black shadow-2xl rounded-lg z-50 border border-gray-100 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-                  <div className="flex flex-col py-2">
-                    {treatmentsList.map((item, i) => (
-                      <Link 
-                        key={i}
-                        to={`/treatment/${item.toLowerCase().replace(/\s+/g, '-')}`}
-                        className="block px-4 py-2.5 hover:bg-gray-50 hover:text-gold text-[12px] transition-colors font-semibold"
-                        onClick={() => setTreatmentsOpen(false)}
-                      >
-                        {item}
-                      </Link>
-                    ))}
-                  </div>
+              Home
+            </Link>
+          </li>
+
+          {/* 2. Tespachhi Treatments with dropdown */}
+          <li className="relative" ref={dropRef}>
+            <button
+              onClick={() => setDropOpen(!dropOpen)}
+              className={`flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors rounded-lg ${
+                transparent
+                  ? isTreatmentActive ? 'text-gold' : 'text-white/90 hover:text-white'
+                  : isTreatmentActive ? 'text-gold'  : 'text-[#0d0d0d] hover:text-gold'
+              }`}
+              aria-haspopup="true"
+              aria-expanded={dropOpen}
+            >
+              Treatments
+              {dropOpen
+                ? <ChevronUp  size={14} strokeWidth={2} />
+                : <ChevronDown size={14} strokeWidth={2} />}
+            </button>
+
+            {dropOpen && (
+              <div className="absolute top-full left-0 mt-1 w-58 bg-white shadow-xl rounded-2xl overflow-hidden z-50 border border-gray-100">
+                <Link
+                  to="/treatments"
+                  className="block px-5 py-3 text-[10px] font-bold tracking-[0.2em] text-gold border-b border-gray-100 hover:bg-[#faf6f0] transition-colors"
+                >
+                  ALL TREATMENTS
+                </Link>
+                {TREATMENT_LINKS.map(({ label, slug }) => (
+                  <Link
+                    key={slug}
+                    to={`/treatment/${slug}`}
+                    className="block px-5 py-3.5 text-sm font-medium text-[#0d0d0d] hover:text-gold hover:bg-[#faf6f0] transition-colors border-b border-gray-50 last:border-b-0"
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </li>
+
+          {/* 3. Baki links (Skincare, Price List, etc.) */}
+          {NAV_LINKS.filter(link => link.label !== 'Home').map(({ label, to }) => {
+            const active = location.pathname === to;
+            return (
+              <li key={to}>
+                <Link
+                  to={to}
+                  className={`px-4 py-2 text-sm font-medium transition-colors rounded-lg ${
+                    transparent
+                      ? active ? 'text-gold' : 'text-white/90 hover:text-white'
+                      : active ? 'text-gold'  : 'text-[#0d0d0d] hover:text-gold'
+                  }`}
+                  aria-current={active ? 'page' : undefined}
+                >
+                  {label}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+
+        {/* Book CTA */}
+        <a
+          href={CLINIC.booking}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden md:inline-flex items-center bg-gold hover:bg-gold-dark text-white text-sm font-semibold px-6 py-2.5 rounded-full transition-all duration-300 shrink-0 ml-6"
+          aria-label="Book your free consultation"
+        >
+          Book Free Consult
+        </a>
+
+        {/* Mobile hamburger */}
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className={`md:hidden ml-auto p-1.5 rounded-lg transition-colors ${transparent ? 'text-white' : 'text-[#0d0d0d]'}`}
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-nav"
+        >
+          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </nav>
+
+      {/* Mobile menu - Home paila nai chha yaha */}
+      <div
+        id="mobile-nav"
+        className={`md:hidden bg-white border-t border-gray-100 overflow-hidden transition-all duration-300 ${
+          mobileOpen ? 'max-h-[700px] opacity-100' : 'max-h-0 opacity-0'
+        }`}
+        aria-hidden={!mobileOpen}
+      >
+        <ul className="px-6 py-4 space-y-0" role="list">
+          {NAV_LINKS.map(({ label, to }, index) => (
+            <li key={to}>
+              {/* Home link */}
+              {label === 'Home' && (
+                <Link
+                  to="/"
+                  className={`block py-3.5 text-sm font-semibold border-b border-gray-50 ${
+                    location.pathname === '/' ? 'text-gold' : 'text-[#0d0d0d]'
+                  }`}
+                >
+                  Home
+                </Link>
+              )}
+
+              {/* Treatments section after Home */}
+              {label === 'Home' && (
+                <div className="border-b border-gray-50">
+                  <button
+                    onClick={() => setMobileTxOpen(!mobileTxOpen)}
+                    className={`w-full flex items-center justify-between py-3.5 text-sm font-semibold ${
+                      isTreatmentActive ? 'text-gold' : 'text-[#0d0d0d]'
+                    }`}
+                  >
+                    Treatments
+                    {mobileTxOpen ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
+                  </button>
+                  {mobileTxOpen && (
+                    <ul className="pl-4 pb-3">
+                      <li>
+                        <Link to="/treatments" className="block py-2 text-[11px] font-bold tracking-widest text-gold">
+                          ALL TREATMENTS
+                        </Link>
+                      </li>
+                      {TREATMENT_LINKS.map(({ label: tLabel, slug }) => (
+                        <li key={slug}>
+                          <Link
+                            to={`/treatment/${slug}`}
+                            className="block py-2 text-sm text-[#0d0d0d] hover:text-gold transition-colors"
+                          >
+                            {tLabel}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               )}
-            </div>
 
-            <Link to="/skincare" className="hover:text-gold transition px-1">SKINCARE</Link>
-            <Link to="/price-list" className="hover:text-gold transition px-1 whitespace-nowrap">PRICE LIST</Link>
-            <Link to="/about" className="hover:text-gold transition px-1 whitespace-nowrap">ABOUT US</Link>
-            <Link to="/contact" className="hover:text-gold transition px-1">CONTACT</Link>
-
-            <a href={bookingLink} target="_blank" rel="noopener noreferrer" className="shrink-0">
-              <button className="bg-gold hover:bg-white hover:text-black text-black px-2.5 py-2 lg:px-5 lg:py-3 rounded-lg font-extrabold text-[10px] lg:text-[13px] transition-all whitespace-nowrap">
-                Book Appointment
-              </button>
-            </a>
-          </div>
-
-          {/* Hamburger Icon */}
-          <button 
-            className="md:hidden p-1 text-gold shrink-0" 
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileOpen && (
-          <div className="absolute top-full left-0 w-full bg-black border-t border-gray-800 shadow-2xl z-50 md:hidden">
-            <div className="flex flex-col p-6 gap-4 text-center font-bold text-[13px] tracking-widest uppercase">
-              
-              <Link to="/" onClick={() => setMobileOpen(false)} className="py-2 border-b border-gray-900 hover:text-gold transition-colors">HOME</Link>
-
-              {/* Mobile Treatments Dropdown */}
-              <div>
-                <button 
-                  onClick={() => setMobileTreatmentsOpen(!mobileTreatmentsOpen)}
-                  className="w-full py-2 border-b border-gray-900 flex items-center justify-center gap-2 hover:text-gold transition-colors"
+              {/* Other links */}
+              {label !== 'Home' && (
+                <Link
+                  to={to}
+                  className={`block py-3.5 text-sm font-semibold border-b border-gray-50 ${
+                    location.pathname === to ? 'text-gold' : 'text-[#0d0d0d]'
+                  }`}
                 >
-                  TREATMENTS
-                  {mobileTreatmentsOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-                </button>
+                  {label}
+                </Link>
+              )}
+            </li>
+          ))}
 
-                {mobileTreatmentsOpen && (
-                  <div className="flex flex-col bg-gray-950/50 mt-1 rounded-lg overflow-hidden">
-                    {treatmentsList.map((item, i) => (
-                      <Link 
-                        key={i}
-                        to={`/treatment/${item.toLowerCase().replace(/\s+/g, '-')}`}
-                        onClick={() => {
-                          setMobileOpen(false);
-                          setMobileTreatmentsOpen(false);
-                        }}
-                        className="block px-6 py-4 text-sm font-medium hover:bg-gray-900 hover:text-gold transition-colors border-b border-gray-800 last:border-none"
-                      >
-                        {item}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <Link to="/skincare" onClick={() => setMobileOpen(false)} className="py-2 border-b border-gray-900 hover:text-gold transition-colors">SKINCARE</Link>
-              <Link to="/price-list" onClick={() => setMobileOpen(false)} className="py-2 border-b border-gray-900 hover:text-gold transition-colors">PRICE LIST</Link>
-              <Link to="/about" onClick={() => setMobileOpen(false)} className="py-2 border-b border-gray-900 hover:text-gold transition-colors">ABOUT US</Link>
-              <Link to="/contact" onClick={() => setMobileOpen(false)} className="py-2 border-b border-gray-900 hover:text-gold transition-colors">CONTACT</Link>
-
-              <a href={bookingLink} target="_blank" rel="noopener noreferrer">
-                <button className="w-full bg-gold text-black py-4 rounded-lg font-black mt-4 shadow-lg">
-                  BOOK APPOINTMENT
-                </button>
-              </a>
-            </div>
-          </div>
-        )}
-      </nav>
+          <li className="pt-4 pb-2">
+            <a
+              href={CLINIC.booking}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full text-center bg-gold hover:bg-gold-dark text-white font-semibold py-3 rounded-xl text-sm transition-all"
+            >
+              Book Free Consultation
+            </a>
+          </li>
+        </ul>
+      </div>
     </header>
   );
 }
