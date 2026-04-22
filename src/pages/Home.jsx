@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <>
       <PageSEO
-        title="Sai Care | Premium Skin & Hair Clinic in Rosyth, Dunfermline"
+        title="Sai Care"
         description="Advanced non-surgical skin and hair treatments in Rosyth. Laser Hair Removal, Chemical Peels, ClearLift, iPixel & Bespoke Facials using FDA-approved technology. Book free consultation."
       />
 
