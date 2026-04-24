@@ -12,7 +12,6 @@ const TREATMENT_LINKS = [
   { label: 'iPixel',              slug: 'ipixel'               },
 ];
 
-// Home lai paila rakhne gari array order milako
 const NAV_LINKS = [
   { label: 'Home',      to: '/'      },
   { label: 'Skincare',  to: '/skincare'   },
@@ -73,28 +72,28 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link
-  to="/"
-  className="flex items-center gap-2 sm:gap-3 shrink-0 group"
-  aria-label="Sai Care Home"
->
-  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-gold shrink-0 transition-transform group-hover:scale-105">
-    <img 
-      src="/images/logo.png" 
-      alt="" 
-      className="w-full h-full object-cover"
-    />
-  </div>
-  <span 
-    className="font-serif text-2xl font-semibold transition-colors"
-    style={{ color: transparent ? '#ffffff' : '#0d0d0d' }}
-  >
-    Sai<span className="text-gold">Care</span>
-  </span>
-</Link>
+          to="/"
+          className="flex items-center gap-2 sm:gap-3 shrink-0 group"
+          aria-label="Sai Care Home"
+        >
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-gold shrink-0 transition-transform group-hover:scale-105">
+            <img 
+              src="/images/logo.png" 
+              alt="" 
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <span 
+            className="font-serif text-2xl font-semibold transition-colors"
+            style={{ color: transparent ? '#ffffff' : '#0d0d0d' }}
+          >
+            Sai<span className="text-gold">Care</span>
+          </span>
+        </Link>
+
         {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-1 flex-1 justify-center" role="list">
           
-          {/* 1. Sabai bhanda paila Home link */}
           <li>
             <Link
               to="/"
@@ -108,7 +107,6 @@ export default function Navbar() {
             </Link>
           </li>
 
-          {/* 2. Tespachhi Treatments with dropdown */}
           <li className="relative" ref={dropRef}>
             <button
               onClick={() => setDropOpen(!dropOpen)}
@@ -127,27 +125,28 @@ export default function Navbar() {
             </button>
 
             {dropOpen && (
-              <div className="absolute top-full left-0 mt-1 w-58 bg-white shadow-xl rounded-2xl overflow-hidden z-50 border border-gray-100">
+              <div className="absolute top-full -left-0 mt-2 w-64 bg-white shadow-2xl rounded-2xl overflow-hidden z-50 border border-gray-100 transform -translate-x-1/4">
                 <Link
                   to="/treatments"
-                  className="block px-5 py-3 text-[10px] font-bold tracking-[0.2em] text-gold border-b border-gray-100 hover:bg-[#faf6f0] transition-colors"
+                  className="block px-6 py-4 text-[10px] font-bold tracking-[0.2em] text-gold border-b border-gray-100 hover:bg-[#faf6f0] transition-colors"
                 >
                   ALL TREATMENTS
                 </Link>
-                {TREATMENT_LINKS.map(({ label, slug }) => (
-                  <Link
-                    key={slug}
-                    to={`/treatment/${slug}`}
-                    className="block px-5 py-3.5 text-sm font-medium text-[#0d0d0d] hover:text-gold hover:bg-[#faf6f0] transition-colors border-b border-gray-50 last:border-b-0"
-                  >
-                    {label}
-                  </Link>
-                ))}
+                <div className="py-1">
+                  {TREATMENT_LINKS.map(({ label, slug }) => (
+                    <Link
+                      key={slug}
+                      to={`/treatment/${slug}`}
+                      className="block px-6 py-3 text-sm font-medium text-[#0d0d0d] hover:text-gold hover:bg-[#faf6f0] transition-colors border-b border-gray-50 last:border-b-0"
+                    >
+                      {label}
+                    </Link>
+                  ))}
+                </div>
               </div>
             )}
           </li>
 
-          {/* 3. Baki links (Skincare, Price List, etc.) */}
           {NAV_LINKS.filter(link => link.label !== 'Home').map(({ label, to }) => {
             const active = location.pathname === to;
             return (
@@ -191,7 +190,7 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile menu - Home paila nai chha yaha */}
+      {/* Mobile menu */}
       <div
         id="mobile-nav"
         className={`md:hidden bg-white border-t border-gray-100 overflow-hidden transition-all duration-300 ${
@@ -200,9 +199,8 @@ export default function Navbar() {
         aria-hidden={!mobileOpen}
       >
         <ul className="px-6 py-4 space-y-0" role="list">
-          {NAV_LINKS.map(({ label, to }, index) => (
+          {NAV_LINKS.map(({ label, to }) => (
             <li key={to}>
-              {/* Home link */}
               {label === 'Home' && (
                 <Link
                   to="/"
@@ -214,7 +212,6 @@ export default function Navbar() {
                 </Link>
               )}
 
-              {/* Treatments section after Home */}
               {label === 'Home' && (
                 <div className="border-b border-gray-50">
                   <button
@@ -248,7 +245,6 @@ export default function Navbar() {
                 </div>
               )}
 
-              {/* Other links */}
               {label !== 'Home' && (
                 <Link
                   to={to}

@@ -26,32 +26,35 @@ export default function TreatmentCard({ treatment, onMoreInfo }) {
         </p>
 
         {/* Actions */}
-        <div className="flex items-center gap-3 mt-auto">
-          {treatment.slug ? (
-            <Link
-              to={`/treatment/${treatment.slug}`}
-              className="flex-1 text-center bg-dark hover:bg-gold text-white text-sm font-medium py-2.5 rounded-xl transition-all duration-300"
-              aria-label={`Learn more about ${treatment.title}`}
-            >
-              Learn More
-            </Link>
-          ) : (
-            <button
-              onClick={onMoreInfo}
-              className="flex-1 bg-dark hover:bg-gold text-white text-sm font-medium py-2.5 rounded-xl transition-all duration-300"
-              aria-label={`More information about ${treatment.title}`}
-            >
-              Learn More
-            </button>
-          )}
-          <button
-            onClick={onMoreInfo}
-            className="p-2.5 border border-gray-200 hover:border-gold hover:text-gold rounded-xl transition-all duration-300 text-muted"
-            aria-label={`Quick view ${treatment.title}`}
-          >
-            <ArrowRight size={16} />
-          </button>
-        </div>
+        {/* Actions */}
+<div className="flex items-center gap-3 mt-auto">
+  {treatment.slug ? (
+    <Link
+      to={`/treatment/${treatment.slug}`}
+      /* Changed bg-dark to bg-gold and hover:bg-gold to hover:bg-gold-dark */
+      className="flex-1 text-center bg-gold hover:bg-gold-dark text-white text-sm font-medium py-2.5 rounded-xl transition-all duration-300"
+      aria-label={`Learn more about ${treatment.title}`}
+    >
+      Learn More
+    </Link>
+  ) : (
+    <button
+      onClick={onMoreInfo}
+      /* Changed bg-dark to bg-gold and hover:bg-gold to hover:bg-gold-dark */
+      className="flex-1 bg-gold hover:bg-gold-dark text-white text-sm font-medium py-2.5 rounded-xl transition-all duration-300"
+      aria-label={`More information about ${treatment.title}`}
+    >
+      Learn More
+    </button>
+  )}
+  <button
+    onClick={onMoreInfo}
+    className="p-2.5 border border-gray-200 hover:border-gold hover:text-gold rounded-xl transition-all duration-300 text-muted"
+    aria-label={`Quick view ${treatment.title}`}
+  >
+    <ArrowRight size={16} />
+  </button>
+</div>
       </div>
     </article>
   );

@@ -137,23 +137,25 @@ export default function Contact() {
                 </div>
 
                 {/* Direct Booking Strip */}
-                <div className="bg-[#faf6f0] border border-gold/10 rounded-3xl p-8">
-                  <div className="flex items-center gap-3 mb-4">
-                    <MessageSquare className="text-gold" size={20} />
-                    <h3 className="font-serif text-xl font-semibold text-[#0d0d0d]">Direct Booking</h3>
-                  </div>
-                  <p className="text-gray-600 text-sm mb-6 leading-relaxed">
-                    Ready to transform your skin? Secure your free consultation instantly using our online booking system.
-                  </p>
-                  <a
-                    href={CLINIC.booking}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block bg-[#0d0d0d] hover:bg-gold text-white text-xs font-bold uppercase tracking-widest px-8 py-4 rounded-xl transition-all shadow-lg"
-                  >
-                    Book Online Now
-                  </a>
-                </div>
+               {/* Direct Booking Strip */}
+<div className="bg-[#faf6f0] border border-gold/10 rounded-3xl p-8">
+  <div className="flex items-center gap-3 mb-4">
+    <MessageSquare className="text-gold" size={20} />
+    <h3 className="font-serif text-xl font-semibold text-[#0d0d0d]">Direct Booking</h3>
+  </div>
+  <p className="text-gray-600 text-sm mb-6 leading-relaxed">
+    Ready to transform your skin? Secure your free consultation instantly using our online booking system.
+  </p>
+  <a
+    href={CLINIC.booking}
+    target="_blank"
+    rel="noopener noreferrer"
+    /* Updated background from bg-[#0d0d0d] to bg-gold and hover to gold-dark */
+    className="inline-block bg-gold hover:bg-gold-dark text-white text-xs font-bold uppercase tracking-widest px-8 py-4 rounded-xl transition-all shadow-lg hover:shadow-gold/20"
+  >
+    Book Online Now
+  </a>
+</div>
               </div>
 
               {/* RIGHT COLUMN — Contact Form */}
@@ -225,7 +227,7 @@ export default function Contact() {
                         type="submit"
                         className="w-full bg-gold hover:bg-gold-dark text-white font-bold py-4 rounded-xl transition-all text-sm tracking-[0.1em] uppercase shadow-md hover:shadow-gold/20"
                       >
-                        Send via WhatsApp
+                        Send Message
                       </button>
                     </form>
                   </>
