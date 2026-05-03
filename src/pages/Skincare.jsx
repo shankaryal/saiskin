@@ -138,10 +138,16 @@ export default function TreatmentMenu() {
             </button>
 
             <div className="md:w-[40%] w-full h-[300px] md:h-auto shrink-0 relative overflow-hidden bg-[#faf6f0]">
-              <img src={selectedTreatment.image} alt="Treatment" className="w-full h-full object-contain" />
-              <div className="absolute bottom-6 left-0 right-0 text-center">
-                <span className="bg-white/90 px-5 py-2 rounded-full text-[10px] font-bold tracking-[0.2em] text-gold shadow-lg uppercase">Sai Care Quality</span>
-              </div>
+           <img 
+            src={selectedTreatment.modalImage || selectedTreatment.image} 
+             alt={selectedTreatment.name} 
+             className="w-full h-full object-contain"
+               />
+            <div className="absolute bottom-6 left-0 right-0 text-center">
+             <span className="bg-white/90 px-5 py-2 rounded-full text-[10px] font-bold tracking-[0.2em] text-gold shadow-lg uppercase">
+             {selectedTreatment.modalImage ? "Sai Care Quality" : "Result"}
+             </span>
+             </div>
             </div>
 
             <div className="flex-1 p-8 md:p-14 overflow-y-auto bg-white">
