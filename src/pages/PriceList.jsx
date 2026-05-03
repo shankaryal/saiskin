@@ -17,7 +17,7 @@ const CATEGORIES = [
   },
   {
     id: 'advanced-skin',
-    title: "Advanced Skin Treatments",
+    title: "PriceList | Sai Care Skin & Hair Clinic",
     description: "Medical-grade facials, peels and microneedling tailored to your skin.",
     items: [
       { name: "Signature Facial",                  price: "£95"  },
@@ -437,7 +437,7 @@ export default function PriceList() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 bg-gold hover:bg-gold-dark text-white px-12 py-5 rounded-2xl text-base font-semibold transition-all shadow-lg hover:shadow-gold/20"
                 >
-                  Book Free Consultation <ExternalLink size={18} aria-hidden="true" />
+                  Book Consultation 
                 </a>
               </div>
             </div>

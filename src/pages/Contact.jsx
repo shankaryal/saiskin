@@ -39,7 +39,7 @@ export default function Contact() {
   return (
     <>
       <PageSEO
-        title="Contact | Sai Care Skin Clinic, Rosyth Dunfermline"
+        title="Contact | Sai Care Skin & Hair Clinic"
         description={`Contact Sai Care at ${CLINIC.address.full}. Book a free consultation or ask about our aesthetic treatments. Call ${CLINIC.phone}.`}
       />
 
@@ -78,7 +78,8 @@ export default function Contact() {
                       <div>
                         <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold mb-1">Location</p>
                         <a
-                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CLINIC.address.full)}`}
+                          href={`
+                            https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CLINIC.address.full)}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-gray-600 text-sm leading-relaxed hover:text-gold transition-colors"

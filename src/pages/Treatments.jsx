@@ -111,7 +111,7 @@ export default function Treatments() {
   return (
     <>
       <PageSEO
-        title="Treatments | Sai Care Skin & Hair Clinic, Rosyth"
+        title="Treatments | Sai Care Skin & Hair Clinic"
         description="Explore our full range of advanced aesthetic treatments at Sai Care Rosyth: Laser Hair Removal, ClearLift, ClearSkin, iPixel, Chemical Peels, DermaLux and more."
       />
 

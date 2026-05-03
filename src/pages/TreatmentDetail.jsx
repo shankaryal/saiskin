@@ -34,7 +34,7 @@ export default function TreatmentDetail() {
   return (
     <>
       <PageSEO 
-        title={`${treatment.title} | Sai Care Rosyth`}
+        title={`${treatment.title} | Sai Care Skin & Hair Clinic`}
         description={`${treatment.shortDesc} Book a professional consultation at Sai Care in Rosyth, Dunfermline.`}
       />
 

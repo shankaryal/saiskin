@@ -14,10 +14,10 @@ export const CLINIC = {
     full: "195 Queensferry Rd, Room 13, 1st Floor, Rosyth, Dunfermline KY11 2JH",
     building: "This is Fusion – The Business Hub",
   },
-  whatsapp: "447311234567", // replace with real number
+  whatsapp: "+44 7278 743921", 
   booking: "https://facesconsent.com/clinics/sai-skin-and-hair-care-d4da38f233b9/sumi-bhandari?clinicName=sumhttps://facesconsent.com/clinics/sai-skin-and-hair-care-d4da38f233b9/sumi-bhandari?clinicName=sumi-bhandarii-bhandari",
-  mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2228.318214240327!2d-3.4357563!3d56.0353008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4887d1887e1f4491%3A0x6a0c5c646b5a7b8e!2s195%20Queensferry%20Rd%2C%20Rosyth%2C%20Dunfermline%20KY11%202JH!5e0!3m2!1sen!2suk!4v1710000000000!5m2!1sen!2suk",
-};
+  mapsEmbed: "https://www.google.com/maps/dir/51.4164134,-0.0726124/56.0431513,-3.4247112/@53.6992101,-4.3713645,7z/data=!3m1!4b1!4m4!4m3!1m1!4e1!1m0?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+  };
 
 // Opening hours — canonical source used by Navbar, Home, Contact, Footer
 export const HOURS = [

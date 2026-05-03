@@ -25,7 +25,7 @@ export default function About() {
   return (
     <>
       <PageSEO
-        title="About Us | Sai Care Skin & Hair Clinic, Rosyth"
+        title="About Us | Sai Care Skin & Hair Clinic"
         description="Learn about Sai Care — a premium aesthetic clinic in Rosyth, Dunfermline. Our vision is to revolutionise aesthetics through innovation, precision and personalised care using FDA-approved technology."
       />
 
