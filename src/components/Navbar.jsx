@@ -13,9 +13,9 @@ const TREATMENT_LINKS = [
 ];
 
 const NAV_LINKS = [
-  { label: 'Home',      to: '/'      },
+  { label: 'Home',     to: '/'      },
   { label: 'Skincare',  to: '/skincare'   },
-  { label: 'Price List', to: '/price-list' },
+  { label: 'Price', to: '/price-list' },
   { label: 'About',      to: '/about'      },
   { label: 'Contact',    to: '/contact'    },
 ];
@@ -68,15 +68,16 @@ export default function Navbar() {
       }`}
       role="banner"
     >
-      <nav className="max-w-7xl mx-auto px-6 md:px-10 flex items-center h-[68px]" aria-label="Main navigation">
+      {/* Reduced padding from px-6 to px-4 for tablets */}
+      <nav className="max-w-7xl mx-auto px-4 lg:px-10 flex items-center h-[68px]" aria-label="Main navigation">
 
-        {/* Logo */}
+        {/* Logo - Reduced gap and font size for tablet */}
         <Link
           to="/"
-          className="flex items-center gap-2 sm:gap-3 shrink-0 group"
+          className="flex items-center gap-2 shrink-0 group"
           aria-label="Sai Care Home"
         >
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-gold shrink-0 transition-transform group-hover:scale-105">
+          <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-gold shrink-0 transition-transform group-hover:scale-105">
             <img 
               src="/images/logo.png" 
               alt="" 
@@ -84,20 +85,20 @@ export default function Navbar() {
             />
           </div>
           <span 
-            className="font-serif text-2xl font-semibold transition-colors"
+            className="font-serif text-xl lg:text-2xl font-semibold transition-colors"
             style={{ color: transparent ? '#ffffff' : '#0d0d0d' }}
           >
             Sai<span className="text-gold">Care</span>
           </span>
         </Link>
 
-        {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-1 flex-1 justify-center" role="list">
+        {/* Desktop links - gap-0 for tablet, gap-1 for large desktop */}
+        <ul className="hidden md:flex items-center gap-0 lg:gap-1 flex-1 justify-center" role="list">
           
           <li>
             <Link
               to="/"
-              className={`px-4 py-2 text-sm font-medium transition-colors rounded-lg ${
+              className={`px-2 lg:px-4 py-2 text-sm font-medium transition-colors rounded-lg ${
                 transparent
                   ? location.pathname === '/' ? 'text-gold' : 'text-white/90 hover:text-white'
                   : location.pathname === '/' ? 'text-gold' : 'text-[#0d0d0d] hover:text-gold'
@@ -110,7 +111,7 @@ export default function Navbar() {
           <li className="relative" ref={dropRef}>
             <button
               onClick={() => setDropOpen(!dropOpen)}
-              className={`flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors rounded-lg ${
+              className={`flex items-center gap-1 px-2 lg:px-4 py-2 text-sm font-medium transition-colors rounded-lg ${
                 transparent
                   ? isTreatmentActive ? 'text-gold' : 'text-white/90 hover:text-white'
                   : isTreatmentActive ? 'text-gold'  : 'text-[#0d0d0d] hover:text-gold'
@@ -153,7 +154,7 @@ export default function Navbar() {
               <li key={to}>
                 <Link
                   to={to}
-                  className={`px-4 py-2 text-sm font-medium transition-colors rounded-lg ${
+                  className={`px-2 lg:px-4 py-2 text-sm font-medium transition-colors rounded-lg ${
                     transparent
                       ? active ? 'text-gold' : 'text-white/90 hover:text-white'
                       : active ? 'text-gold'  : 'text-[#0d0d0d] hover:text-gold'
@@ -167,15 +168,15 @@ export default function Navbar() {
           })}
         </ul>
 
-        {/* Book CTA */}
+        {/* Book CTA - Smaller padding and font for tablet */}
         <a
           href={CLINIC.booking}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden md:inline-flex items-center bg-gold hover:bg-gold-dark text-white text-sm font-semibold px-6 py-2.5 rounded-full transition-all duration-300 shrink-0 ml-6"
+          className="hidden md:inline-flex items-center bg-gold hover:bg-gold-dark text-white text-xs lg:text-sm font-semibold px-4 lg:px-6 py-2.5 rounded-full transition-all duration-300 shrink-0 ml-2 lg:ml-6"
           aria-label="Book your free consultation"
         >
-          Book Free Consult
+          Book Now
         </a>
 
         {/* Mobile hamburger */}
@@ -265,7 +266,7 @@ export default function Navbar() {
               rel="noopener noreferrer"
               className="block w-full text-center bg-gold hover:bg-gold-dark text-white font-semibold py-3 rounded-xl text-sm transition-all"
             >
-              Book Free Consultation
+              Book Now
             </a>
           </li>
         </ul>
