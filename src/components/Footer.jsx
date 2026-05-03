@@ -115,7 +115,7 @@ export default function Footer() {
                 </a>
               </div>
             </address>
-
+{/* 
             <div className="pt-4 border-t border-gold/10">
               <h5 className="text-[10px] font-bold uppercase tracking-[0.1em] text-dark mb-3 flex items-center gap-2">
                 <Clock size={13} /> Opening Hours
@@ -128,7 +128,7 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
 
