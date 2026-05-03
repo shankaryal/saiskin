@@ -4,7 +4,7 @@ import PageSEO from '../components/PageSEO.jsx';
 import PageWrapper from '../components/PageWrapper.jsx';
 import useScrollLock from '../hooks/usesScrollLock.js'; 
 import { CLINIC } from '../constants';
-import { TREATMENTS } from '../treatments.js';
+import { TREATMENTS } from '../skincare.js';
 
 const CATEGORIES = [
   { id: 'All', label: 'All Treatments' },
@@ -138,9 +138,9 @@ export default function TreatmentMenu() {
             </button>
 
             <div className="md:w-[40%] w-full h-[300px] md:h-auto shrink-0 relative overflow-hidden bg-[#faf6f0]">
-              <img src={selectedTreatment.image} alt="Treatment" className="w-full h-full object-cover" />
+              <img src={selectedTreatment.image} alt="Treatment" className="w-full h-full object-contain" />
               <div className="absolute bottom-6 left-0 right-0 text-center">
-                <span className="bg-white/90 px-5 py-2 rounded-full text-[10px] font-bold tracking-[0.2em] text-gold shadow-lg uppercase">Before/After</span>
+                <span className="bg-white/90 px-5 py-2 rounded-full text-[10px] font-bold tracking-[0.2em] text-gold shadow-lg uppercase">Sai Care Quality</span>
               </div>
             </div>
 

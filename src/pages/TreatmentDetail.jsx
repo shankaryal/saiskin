@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Clock, Tag, ArrowLeft, ChevronRight } from 'lucide-react';
-import { allTreatments } from './Treatments.jsx';
+import { allTreatments } from '../treatments.js';
 import { CLINIC } from '../constants';
 import PageWrapper from '../components/PageWrapper.jsx';
 import PageSEO from '../components/PageSEO.jsx';
