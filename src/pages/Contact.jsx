@@ -53,8 +53,8 @@ export default function Contact() {
               <h1 id="contact-hero-heading" className="font-serif text-4xl md:text-6xl font-semibold mb-6 text-[#0d0d0d]">
                 Contact Sai Care
               </h1>
-              <p className="text-gray-600 text-lg leading-relaxed max-w-2xl mx-auto font-light">
-                Whether you have a question about our medical-grade technology or want to start your personalized skin journey, our team in Rosyth is ready to assist you.
+               <p className="text-lg md:text-xl text-gray-600 leading-relaxed font-light italic font-serif">
+                "Whether you have a question about our medical-grade technology or want to start your personalized skin journey, our team in Rosyth is ready to assist you."
               </p>
             </div>
           </section>
