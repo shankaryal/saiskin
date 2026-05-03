@@ -7,7 +7,7 @@ import useScrollLock from '../hooks/usesScrollLock.js';
 import { CLINIC } from '../constants';
 import {allTreatments} from '../treatments.js';
 
-export const featuredTreatments = allTreatments.slice(0, 3);
+export const featuredTreatments = allTreatments.slice(0, 6);
 
 export default function Treatments() {
   const [selectedTreatment, setSelectedTreatment] = useState(null);
