@@ -59,7 +59,7 @@ export default function Home() {
               rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center bg-gold hover:bg-gold-dark text-white px-10 py-5 rounded-2xl text-base font-semibold transition-all duration-300 shadow-xl hover:-translate-y-1"
             >
-              Book Free Consultation
+              Book Consultation
             </a>
             <Link
               to="/treatments"
@@ -83,7 +83,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Sai Care Section - Light Background */}
+      {/* Why Sai Care Section */}
       <section className="py-24 md:py-32 bg-[#faf6f0]" aria-labelledby="unique-heading">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16 md:mb-24">
@@ -112,7 +112,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Treatments - White Background */}
+      {/* Featured Treatments - With New Explore More Button */}
       <section className="py-24 md:py-32 bg-white" aria-labelledby="treatments-heading">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -122,9 +122,10 @@ export default function Home() {
                 Signature Treatments
               </h2>
             </div>
+            {/* Desktop link (Hidden on mobile to focus on the big button below) */}
             <Link
               to="/treatments"
-              className="inline-flex items-center gap-2 text-gold hover:text-gold-dark font-bold text-xs uppercase tracking-widest transition-all group"
+              className="hidden md:inline-flex items-center gap-2 text-gold hover:text-gold-dark font-bold text-xs uppercase tracking-widest transition-all group"
             >
               Explore Full Menu <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </Link>
@@ -135,14 +136,23 @@ export default function Home() {
               <TreatmentCard key={i} treatment={t} onMoreInfo={() => openModal(t)} />
             ))}
           </div>
+
+          {/* New Explore More Button */}
+          <div className="mt-16 text-center">
+            <Link
+              to="/treatments"
+              className="inline-flex items-center justify-center gap-3 bg-white border-2 border-gold text-gold hover:bg-gold hover:text-white px-12 py-5 rounded-2xl text-sm font-bold uppercase tracking-widest transition-all duration-300 shadow-lg hover:shadow-gold/20 active:scale-95"
+            >
+              View All Treatments <ArrowRight size={18} />
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Location & Visit - Light Background */}
+      {/* Location & Visit Section */}
       <section className="py-24 md:py-32 bg-[#faf6f0]" aria-labelledby="location-heading">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
-            
             <div className="lg:col-span-5 space-y-10">
               <div>
                 <p className="text-gold text-xs uppercase tracking-[0.3em] font-bold mb-4">Visit Our Clinic</p>

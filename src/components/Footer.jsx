@@ -10,7 +10,7 @@ export default function Footer() {
     { name: 'Home', path: '/' },
     { name: 'Treatments', path: '/treatments' },
     { name: 'Skincare', path: '/skincare' },
-    { name: 'Price List', path: '/price-list' },
+    { name: 'Price', path: '/price-list' },
     { name: 'About Us', path: '/about' },
     { name: 'Contact', path: '/contact' },
   ];
