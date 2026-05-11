@@ -115,8 +115,9 @@ export default function Treatments() {
                   </span>
                 )}
                 {selectedTreatment.price && (
-                  <span className="flex items-center gap-2 bg-cream px-5 py-2.5 rounded-xl text-sm font-semibold text-dark">
-                    <Tag size={14} className="text-gold" aria-hidden="true" /> {selectedTreatment.price}
+                  <span className="flex items-center gap-2 bg-gold/10 border border-gold/20 px-5 py-2.5 rounded-xl">
+                    <Tag size={14} className="text-gold" aria-hidden="true" />
+                    <span className="font-serif text-base font-bold text-gold">{selectedTreatment.price}</span>
                   </span>
                 )}
               </div>

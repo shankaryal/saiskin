@@ -95,12 +95,7 @@ export default function Navbar() {
             >
               Sai <span className="text-gold">Skin Care</span>
             </span>
-            <span
-              className="text-[9px] tracking-[0.25em] font-medium uppercase block mt-0.5"
-              style={{ color: transparent ? 'rgba(255,255,255,0.6)' : '#a8832a' }}
-            >
-              Skin &amp; Hair
-            </span>
+          
           </div>
         </Link>
 

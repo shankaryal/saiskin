@@ -104,10 +104,10 @@ export default function Skincare() {
                   </div>
                   <div className="p-4 text-center">
                     <p className="text-[8px] uppercase tracking-widest text-gold font-bold mb-1">{item.category}</p>
-                    <h2 className="font-serif text-sm md:text-base font-semibold mb-1 text-dark line-clamp-1">
+                    <h2 className="font-serif text-sm md:text-base font-semibold mb-1.5 text-dark line-clamp-1">
                       {item.name}
                     </h2>
-                    <p className="text-xs font-bold text-muted">{item.price}</p>
+                    <p className="font-serif text-sm font-bold text-dark">{item.price}</p>
                   </div>
                 </article>
               ))}
@@ -172,11 +172,11 @@ export default function Skincare() {
                 <div className="flex gap-10 mb-9 border-y border-cream-dark py-5">
                   <div>
                     <p className="text-[10px] uppercase font-bold text-muted/50 mb-1">Price</p>
-                    <p className="text-2xl font-bold text-dark">{selectedTreatment.price}</p>
+                    <p className="font-serif text-2xl font-bold text-gold">{selectedTreatment.price}</p>
                   </div>
                   <div className="border-l border-cream-dark pl-10">
                     <p className="text-[10px] uppercase font-bold text-muted/50 mb-1">Duration</p>
-                    <p className="text-2xl font-bold text-dark flex items-center gap-2">
+                    <p className="font-serif text-2xl font-bold text-dark flex items-center gap-2">
                       <Clock size={19} className="text-gold" aria-hidden="true" />
                       {selectedTreatment.time}
                     </p>

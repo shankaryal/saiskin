@@ -7,17 +7,17 @@ const VALUES = [
   {
     icon: <Target className="text-gold" size={26} aria-hidden="true" />,
     title: "Evidence-Based Practice",
-    description: "Every treatment we offer is backed by clinical research. We use technology and techniques that are proven to work — not trends.",
+    description: "Sumi doesn't offer a treatment unless she believes in it. Everything here is backed by clinical evidence — not Instagram trends or whatever's selling well this season.",
   },
   {
     icon: <ShieldCheck className="text-gold" size={26} aria-hidden="true" />,
-    title: "Safety Above All",
-    description: "All treatments are performed using FDA-approved technology with a strong focus on your safety, skin health and long-term wellbeing.",
+    title: "Your Safety First",
+    description: "Every piece of equipment is FDA-approved and Sumi is fully qualified to use it. But beyond the credentials — she simply won't do anything she wouldn't be comfortable doing on herself.",
   },
   {
     icon: <Heart className="text-gold" size={26} aria-hidden="true" />,
-    title: "Natural Results",
-    description: "We believe the best results are the ones that make you feel like yourself — only better. No overdone, no artificial. Just genuine confidence.",
+    title: "Results That Look Like You",
+    description: "The goal is never to change how you look — it's to help you feel good in the skin you're in. Subtle, natural, real. You should leave looking refreshed, not done.",
   },
 ];
 
@@ -60,7 +60,7 @@ export default function About() {
                 About Sai Skin Care
               </h1>
               <p className="text-lg md:text-xl text-muted leading-relaxed font-light italic font-serif">
-                "Helping every client feel confident, cared for and genuinely at home in their own skin."
+                "I wanted to build a clinic where people feel properly looked after — not like they're being sold something."
               </p>
             </div>
           </section>
@@ -101,13 +101,13 @@ export default function About() {
 
                   <div className="space-y-5 text-muted leading-relaxed">
                     <p>
-                      Sumi is a fully qualified, graduate skin specialist with over 10 years of experience in advanced skin and hair treatments. Her career has been built on a deep commitment to clinical excellence, continuous learning, and genuine compassion for every client she works with.
+                      Sumi has been working in skin and hair treatments for over 10 years — and in that time, she's built a reputation not just for results, but for the kind of care that makes people keep coming back. She's never stopped learning, never stopped pushing to get better, and still gets just as invested in your skin goals as she did with her very first client.
                     </p>
                     <p>
-                      Recognised across the industry for both her skill and her approach, Sumi was awarded <strong className="text-dark font-semibold">Best Student of the Year in Scotland</strong> at the prestigious CDN Awards — and was named a <strong className="text-dark font-semibold">National Charity Award Finalist</strong> for her extensive charitable contributions across Scotland.
+                      The industry has recognised that too. Sumi was awarded <strong className="text-dark font-semibold">Best Student of the Year in Scotland</strong> at the CDN Awards, and was named a <strong className="text-dark font-semibold">National Charity Award Finalist</strong> for her work across Scotland — but she'll tell you those things matter far less to her than a client leaving happy.
                     </p>
                     <p>
-                      At Sai Skin Care, Sumi is known for delivering safe, evidence-based treatments with a strong focus on natural results, client confidence, and truly exceptional care. Whether you're coming in for your first consultation or your tenth treatment, you'll always leave feeling listened to and looked after.
+                      Whatever brings you in — whether it's your first ever consultation or you've been coming for years — you'll get the same thing every time: Sumi's full attention, honest advice, and a treatment that's genuinely built around you.
                     </p>
                     <p className="italic font-serif text-base border-l-2 border-gold pl-5 text-dark/70">
                       "I started Sai Skin Care because I wanted a clinic where clients feel genuinely cared for — not rushed, not sold to, just properly looked after. That's still what drives everything we do."
@@ -157,15 +157,15 @@ export default function About() {
           <section className="py-16 md:py-24 bg-cream" aria-labelledby="vision-heading">
             <div className="max-w-7xl mx-auto px-6">
               <div className="max-w-3xl mx-auto text-center space-y-6">
-                <p className="text-gold text-xs uppercase tracking-[0.3em] font-bold">Our Vision</p>
+                <p className="text-gold text-xs uppercase tracking-[0.3em] font-bold">The Bigger Picture</p>
                 <h2 id="vision-heading" className="font-serif text-3xl md:text-4xl font-semibold text-dark">
-                  What Sai Skin Care Stands For
+                  Why Sai Skin Care Exists
                 </h2>
                 <p className="text-muted leading-relaxed">
-                  Our vision is to be Dunfermline and Fife's most trusted aesthetic clinic — one where cutting-edge technology and genuine human care exist side by side. We're not here to chase trends. We're here to deliver real, lasting results in an environment where you feel completely at ease.
+                  We want to be the clinic in Fife that people actually trust — where you never feel pressured, oversold, or like just another booking in the diary. The technology matters, but it's nothing without the person behind it. That's what Sumi brings, every single time.
                 </p>
                 <p className="text-muted leading-relaxed">
-                  From your first free consultation to your final treatment session, everything at Sai Skin Care is designed around you — your skin, your goals, your comfort.
+                  We're not here to chase trends or push treatments you don't need. We're here to help you understand your skin, figure out what it actually needs, and get you real results — at a pace that works for you.
                 </p>
               </div>
             </div>
@@ -176,10 +176,10 @@ export default function About() {
             <div className="max-w-7xl mx-auto px-6">
               <div className="text-center mb-12">
                 <h2 id="values-heading" className="font-serif text-3xl md:text-4xl font-semibold italic mb-4 text-dark">
-                  The Sai Skin Care Standard
+                  What We Actually Stand For
                 </h2>
                 <p className="text-muted max-w-lg mx-auto text-sm">
-                  Our core values shape every treatment we deliver and every client we welcome.
+                  Not a list of buzzwords — just three things Sumi genuinely believes in, and that shape every single appointment.
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
@@ -203,10 +203,10 @@ export default function About() {
           <section className="py-24 md:py-32 text-center bg-cream" aria-labelledby="cta-heading">
             <div className="max-w-2xl mx-auto px-6">
               <h2 id="cta-heading" className="font-serif text-3xl md:text-5xl font-semibold text-dark mb-5">
-                Ready to Meet Sumi?
+                Come and Say Hello
               </h2>
               <p className="text-muted mb-12 leading-relaxed text-base">
-                Book a free consultation at our Rosyth clinic. Sumi will take the time to understand your skin, answer your questions honestly, and recommend the right treatment — only if it's right for you.
+                Your first visit is always free — no pressure, no obligation. Sumi will have a proper look at your skin, answer anything you want to ask, and only suggest a treatment if she genuinely thinks it's right for you.
               </p>
               <a
                 href={CLINIC.booking}

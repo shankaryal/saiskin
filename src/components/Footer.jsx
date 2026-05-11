@@ -23,7 +23,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-dark text-cream/70 pt-20 pb-10" role="contentinfo">
+    <footer className="bg-white text-dark/75 border-t-2 border-gold/40 pt-20 pb-10" role="contentinfo">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* ── Main grid ── */}
@@ -40,7 +40,7 @@ export default function Footer() {
                 />
               </div>
               <div>
-                <p className="font-serif text-2xl font-semibold text-cream leading-none">
+                <p className="font-serif text-2xl font-semibold text-dark leading-none">
                   Sai <span className="text-gold">Skin Care</span>
                 </p>
                 <p className="text-[9px] tracking-[0.25em] text-gold/60 font-medium uppercase mt-1">
@@ -50,7 +50,7 @@ export default function Footer() {
             </Link>
 
             <p className="text-sm leading-relaxed max-w-xs">
-              Premium aesthetic clinic in Rosyth, Dunfermline — delivering advanced, evidence-based skin and hair treatments using FDA-approved technology.
+              A welcoming clinic in Rosyth run by Sumi — an award-winning skin specialist who genuinely loves what she does. Come for the results, stay because you feel looked after.
             </p>
 
             <div className="flex gap-3">
@@ -64,7 +64,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Follow Sai Skin Care on ${label}`}
-                  className="w-9 h-9 rounded-full border border-gold/20 flex items-center justify-center hover:bg-gold hover:border-gold hover:text-white text-cream/50 transition-all duration-300"
+                  className="w-9 h-9 rounded-full border border-gold/40 flex items-center justify-center hover:bg-gold hover:border-gold hover:text-white text-dark/50 transition-all duration-300"
                 >
                   <Icon size={16} aria-hidden="true" />
                 </a>
@@ -137,15 +137,15 @@ export default function Footer() {
             </address>
 
             {/* Opening Hours */}
-            <div className="pt-4 border-t border-cream/10">
-              <h5 className="text-[10px] font-bold uppercase tracking-[0.15em] text-cream/50 mb-3 flex items-center gap-2">
+            <div className="pt-4 border-t border-gold/20">
+              <h5 className="text-[10px] font-bold uppercase tracking-[0.15em] text-dark/50 mb-3 flex items-center gap-2">
                 <Clock size={12} aria-hidden="true" /> Opening Hours
               </h5>
               <ul className="space-y-1.5" role="list">
                 {HOURS.map(({ day, time, open }) => (
                   <li key={day} className="flex justify-between gap-4 text-xs">
-                    <span className={open ? 'text-cream/80 font-medium' : 'text-cream/30'}>{day}</span>
-                    <span className={open ? 'text-cream/60' : 'text-cream/25 italic'}>{time}</span>
+                    <span className={open ? 'text-dark font-semibold' : 'text-dark/30'}>{day}</span>
+                    <span className={open ? 'text-gold font-semibold' : 'text-dark/25 italic'}>{time}</span>
                   </li>
                 ))}
               </ul>
@@ -154,13 +154,13 @@ export default function Footer() {
         </div>
 
         {/* ── Bottom bar ── */}
-        <div className="pt-8 border-t border-cream/10 flex flex-col md:flex-row justify-between items-center gap-5 text-[11px] text-cream/30 tracking-wider uppercase">
+        <div className="pt-8 border-t border-gold/20 flex flex-col md:flex-row justify-between items-center gap-5 text-[11px] text-dark/40 tracking-wider uppercase">
           <p>© {year} Sai Skin Care. All Rights Reserved.</p>
           <div className="flex gap-8">
             <Link to="/privacy-policy" className="hover:text-gold transition-colors">Privacy Policy</Link>
             <Link to="/terms"           className="hover:text-gold transition-colors">Terms &amp; Conditions</Link>
           </div>
-          <p className="font-serif italic lowercase tracking-normal text-gold/40 normal-case hidden lg:block">
+          <p className="font-serif italic lowercase tracking-normal text-gold/60 normal-case hidden lg:block">
             Redefining Aesthetics
           </p>
         </div>

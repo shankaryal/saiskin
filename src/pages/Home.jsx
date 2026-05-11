@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { X, Clock, Tag, ArrowRight, ShieldCheck, Star, MapPin, Award } from 'lucide-react';
+import { X, Clock, Tag, ArrowRight, ShieldCheck, Star, MapPin, Award, Quote } from 'lucide-react';
 import TreatmentCard from '../components/Treatmentcard.jsx';
 import { featuredTreatments } from './Treatments.jsx';
 import PageSEO from '../components/PageSEO.jsx';
@@ -46,20 +46,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-dark/65 via-dark/35 to-dark/20" />
 
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-          <p className="text-gold text-[11px] uppercase tracking-[0.4em] font-bold mb-6">
-            Rosyth · Dunfermline · Fife
-          </p>
-
-          {/* Star rating */}
-          <div className="flex items-center justify-center gap-2 mb-7">
-            <div className="flex" aria-label="Five star rating">
-              {[1, 2, 3, 4, 5].map((s) => (
-                <Star key={s} size={16} className="text-gold fill-gold" aria-hidden="true" />
-              ))}
-            </div>
-            <span className="text-white/70 text-sm font-medium">Rated 5 stars by our clients</span>
-          </div>
-
+         
           <h1
             id="hero-heading"
             className="font-serif text-5xl md:text-8xl font-semibold leading-[1.08] mb-7 drop-shadow-lg"
@@ -112,7 +99,7 @@ export default function Home() {
           <div className="text-center mb-16">
             <p className="text-gold text-xs uppercase tracking-[0.3em] font-bold mb-4">The Sai Skin Care Difference</p>
             <h2 id="why-heading" className="font-serif text-4xl md:text-5xl font-semibold text-dark mb-5">
-              Clinical Excellence,<br />Compassionate Care
+              Clinical Excellence
             </h2>
             <p className="text-muted text-lg max-w-2xl mx-auto leading-relaxed">
               We combine world-class technology with a genuinely personal approach — because you deserve both.
@@ -135,9 +122,46 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <section className="py-24 md:py-32 bg-cream" aria-labelledby="treatments-heading">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+            <div className="max-w-xl">
+              <p className="text-gold text-xs uppercase tracking-[0.3em] font-bold mb-4">Popular Choices</p>
+              <h2 id="treatments-heading" className="font-serif text-4xl md:text-5xl font-semibold text-dark">
+                Signature Treatments
+              </h2>
+            </div>
+            <Link
+              to="/treatments"
+              className="hidden md:inline-flex items-center gap-2 text-gold hover:text-gold-dark font-bold text-xs uppercase tracking-widest transition-all group"
+            >
+              View Full Menu <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
+            {featuredTreatments.map((t, i) => (
+              <TreatmentCard
+                key={i}
+                treatment={t}
+                onMoreInfo={() => setSelectedTreatment(t)}
+              />
+            ))}
+          </div>
+
+          <div className="mt-14 text-center">
+            <Link
+              to="/treatments"
+              className="inline-flex items-center justify-center gap-3 bg-white border-2 border-gold text-gold hover:bg-gold hover:text-white px-12 py-5 rounded-2xl text-sm font-bold uppercase tracking-widest transition-all duration-300 shadow-sm hover:shadow-gold/20 active:scale-95"
+            >
+              View All Treatments <ArrowRight size={17} aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* ── Meet Sumi teaser ── */}
-      {/* <section className="py-24 md:py-28 bg-white" aria-labelledby="sumi-heading">
+      <section className="py-24 md:py-28 bg-white" aria-labelledby="sumi-heading">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative">
@@ -176,46 +200,67 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
 
-      {/* ── Featured Treatments ── */}
-      <section className="py-24 md:py-32 bg-cream" aria-labelledby="treatments-heading">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
-            <div className="max-w-xl">
-              <p className="text-gold text-xs uppercase tracking-[0.3em] font-bold mb-4">Popular Choices</p>
-              <h2 id="treatments-heading" className="font-serif text-4xl md:text-5xl font-semibold text-dark">
-                Signature Treatments
-              </h2>
+      {/* ── Testimonials ── */}
+      <section className="py-24 md:py-32 bg-cream" aria-labelledby="reviews-heading">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <p className="text-gold text-xs uppercase tracking-[0.3em] font-bold mb-4">Client Stories</p>
+            <h2 id="reviews-heading" className="font-serif text-4xl md:text-5xl font-semibold text-dark mb-4">
+              What Our Clients Say
+            </h2>
+            <div className="flex items-center justify-center gap-2">
+              {[1,2,3,4,5].map(s => (
+                <Star key={s} size={18} className="text-gold fill-gold" aria-hidden="true" />
+              ))}
+              <span className="ml-2 text-muted text-sm font-medium">5-star rated clinic</span>
             </div>
-            <Link
-              to="/treatments"
-              className="hidden md:inline-flex items-center gap-2 text-gold hover:text-gold-dark font-bold text-xs uppercase tracking-widest transition-all group"
-            >
-              View Full Menu <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-            </Link>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
-            {featuredTreatments.map((t, i) => (
-              <TreatmentCard
-                key={i}
-                treatment={t}
-                onMoreInfo={() => setSelectedTreatment(t)}
-              />
+          <div className="grid md:grid-cols-3 gap-7">
+            {[
+              {
+                quote: "Sumi is one of a kind. I was so nervous before my first laser session but she had me laughing within five minutes. Six sessions in and I've not had to shave in months. Worth every single penny.",
+                name: "Rachel P.",
+                location: "Dunfermline",
+              },
+              {
+                quote: "I drove 40 minutes from Edinburgh because a friend swore by Sumi. Now I'm the one telling everyone. She just looked at my skin and knew exactly what it needed. The results honestly blew me away.",
+                name: "Amy G.",
+                location: "Edinburgh",
+              },
+              {
+                quote: "Honest advice — she didn't try to sell me anything I didn't need. Just told me what would actually work and got on with it. Refreshing to find a clinic like that. My skin has completely transformed.",
+                name: "Claire W.",
+                location: "Kirkcaldy",
+              },
+            ].map(({ quote, name, location }) => (
+              <blockquote
+                key={name}
+                className="bg-white rounded-4xl p-8 border border-cream-dark shadow-sm flex flex-col gap-6 hover:shadow-xl hover:shadow-gold/5 transition-all duration-500"
+              >
+                <Quote size={24} className="text-gold/30 shrink-0" aria-hidden="true" />
+                <p className="text-muted leading-relaxed text-sm flex-1 italic">{quote}</p>
+                <footer className="flex items-center gap-3">
+                  <div className="flex">
+                    {[1,2,3,4,5].map(s => (
+                      <Star key={s} size={12} className="text-gold fill-gold" aria-hidden="true" />
+                    ))}
+                  </div>
+                  <div>
+                    <p className="text-dark font-semibold text-sm leading-none">{name}</p>
+                    <p className="text-muted text-xs mt-0.5">{location}</p>
+                  </div>
+                </footer>
+              </blockquote>
             ))}
-          </div>
-
-          <div className="mt-14 text-center">
-            <Link
-              to="/treatments"
-              className="inline-flex items-center justify-center gap-3 bg-white border-2 border-gold text-gold hover:bg-gold hover:text-white px-12 py-5 rounded-2xl text-sm font-bold uppercase tracking-widest transition-all duration-300 shadow-sm hover:shadow-gold/20 active:scale-95"
-            >
-              View All Treatments <ArrowRight size={17} aria-hidden="true" />
-            </Link>
           </div>
         </div>
       </section>
+
+      {/* ── Featured Treatments ── */}
+      
 
       {/* ── Location ── */}
       <section className="py-24 md:py-32 bg-white" aria-labelledby="location-heading">
@@ -311,8 +356,9 @@ export default function Home() {
                   </div>
                 )}
                 {selectedTreatment.price && (
-                  <div className="flex items-center gap-2 bg-cream px-5 py-2.5 rounded-xl text-sm font-semibold text-dark">
-                    <Tag size={15} className="text-gold" aria-hidden="true" /> {selectedTreatment.price}
+                  <div className="flex items-center gap-2 bg-gold/10 border border-gold/20 px-5 py-2.5 rounded-xl">
+                    <Tag size={15} className="text-gold" aria-hidden="true" />
+                    <span className="font-serif text-base font-bold text-gold">{selectedTreatment.price}</span>
                   </div>
                 )}
               </div>

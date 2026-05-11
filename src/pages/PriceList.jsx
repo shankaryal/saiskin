@@ -212,10 +212,10 @@ function PriceRow({ item, index, total }) {
   return (
     <div className={`flex items-start justify-between gap-4 py-4 ${!isLast ? 'border-b border-cream-dark' : ''}`}>
       <div className="flex-1 min-w-0">
-        <p className={`text-sm font-medium leading-snug ${item.highlight ? 'text-gold-dark' : 'text-dark'}`}>
+        <p className={`text-sm font-semibold leading-snug ${item.highlight ? 'text-dark' : 'text-dark'}`}>
           {item.name}
           {item.highlight && (
-            <span className="ml-2 text-[9px] font-bold uppercase tracking-widest bg-gold/10 text-gold-dark px-2 py-0.5 rounded-full align-middle">
+            <span className="ml-2 text-[9px] font-bold uppercase tracking-widest bg-gold/10 text-gold px-2.5 py-0.5 rounded-full align-middle">
               Best Value
             </span>
           )}
@@ -224,19 +224,25 @@ function PriceRow({ item, index, total }) {
           <p className="text-xs text-muted mt-0.5 leading-relaxed">{item.detail}</p>
         )}
         {item.course && (
-          <p className="text-xs text-muted mt-1">
-            <span className="text-gold font-semibold">{item.course.price}</span>
-            <span className="text-muted/30 mx-1">·</span>
-            {item.course.label}
+          <p className="text-xs text-muted mt-1 flex items-center gap-1.5">
+            <span className="font-serif font-bold text-gold">{item.course.price}</span>
+            <span className="text-muted/30">·</span>
+            <span>{item.course.label}</span>
           </p>
         )}
       </div>
       <div className="shrink-0 text-right">
-        <span className={`font-serif text-xl font-semibold leading-none ${item.price === 'FREE' ? 'text-gold' : 'text-dark'}`}>
-          {item.price}
-        </span>
+        {item.price === 'FREE' ? (
+          <span className="inline-flex items-center bg-gold text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
+            FREE
+          </span>
+        ) : (
+          <span className={`font-serif text-xl font-bold leading-none ${item.highlight ? 'text-gold' : 'text-dark'}`}>
+            {item.price}
+          </span>
+        )}
         {item.course && (
-          <p className="text-[10px] text-muted/40 mt-0.5">per session</p>
+          <p className="text-[10px] text-muted/40 mt-1">per session</p>
         )}
       </div>
     </div>
@@ -245,8 +251,8 @@ function PriceRow({ item, index, total }) {
 
 function CategoryCard({ category, isOpen, onToggle, index }) {
   return (
-    <div className={`border rounded-2xl overflow-hidden transition-all duration-300 ${
-      isOpen ? 'border-gold/30 shadow-md shadow-gold/5' : 'border-cream-dark hover:border-gold/20'
+    <div className={`border rounded-3xl overflow-hidden transition-all duration-300 ${
+      isOpen ? 'border-gold/40 shadow-lg shadow-gold/5' : 'border-cream-dark hover:border-gold/25'
     }`}>
       <button
         onClick={onToggle}

@@ -50,12 +50,12 @@ export default function Contact() {
           {/* ── Hero ── */}
           <section className="pt-28 pb-14 md:pt-36 md:pb-20 bg-cream text-center" aria-labelledby="contact-heading">
             <div className="max-w-3xl mx-auto px-6">
-              <p className="text-xs uppercase tracking-[0.3em] text-gold font-bold mb-4">Get in Touch</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-gold font-bold mb-4">Say Hello</p>
               <h1 id="contact-heading" className="font-serif text-4xl md:text-6xl font-semibold mb-5 text-dark">
-                Contact Sai Skin Care
+                We'd Love to Hear From You
               </h1>
               <p className="text-lg text-muted leading-relaxed">
-                Got a question? We'd love to hear from you. We reply to all messages within 24 hours.
+                Whether you want to ask about a treatment, check availability, or just get a feel for the place — drop us a message. Sumi replies personally, usually the same day.
               </p>
             </div>
           </section>
@@ -67,7 +67,7 @@ export default function Contact() {
               {/* Left — clinic info */}
               <div className="space-y-10">
                 <div>
-                  <h2 className="font-serif text-2xl font-semibold text-dark mb-8">Visit Our Clinic</h2>
+                  <h2 className="font-serif text-2xl font-semibold text-dark mb-8">Come and See Us</h2>
 
                   <address className="not-italic space-y-6">
                     {/* Location */}
@@ -156,9 +156,9 @@ export default function Contact() {
 
                 {/* Direct booking strip */}
                 <div className="bg-cream border border-cream-dark rounded-3xl p-8">
-                  <h3 className="font-serif text-xl font-semibold text-dark mb-3">Book Online</h3>
+                  <h3 className="font-serif text-xl font-semibold text-dark mb-3">Skip the Queue</h3>
                   <p className="text-muted text-sm mb-6 leading-relaxed">
-                    Ready to get started? Secure your free consultation instantly using our online booking system.
+                    Book your free skin consultation online — pick a time that works for you and we'll see you there.
                   </p>
                   <a
                     href={CLINIC.booking}
@@ -175,8 +175,8 @@ export default function Contact() {
               <div className="border border-cream-dark rounded-5xl p-8 md:p-12 bg-white shadow-xl shadow-dark/5">
                 {!isSent ? (
                   <>
-                    <h2 className="font-serif text-3xl font-semibold text-dark mb-2">Send a Message</h2>
-                    <p className="text-muted text-sm mb-9">Fill in the form and we'll be in touch within 24 hours.</p>
+                    <h2 className="font-serif text-3xl font-semibold text-dark mb-2">Drop Us a Message</h2>
+                    <p className="text-muted text-sm mb-9">Tell us what you're thinking — we'll come back to you, usually within a few hours.</p>
 
                     <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -249,9 +249,9 @@ export default function Contact() {
                         <CheckCircle2 size={52} className="text-gold" aria-hidden="true" />
                       </div>
                     </div>
-                    <h2 className="font-serif text-3xl font-semibold text-dark mb-4">Message Ready</h2>
+                    <h2 className="font-serif text-3xl font-semibold text-dark mb-4">On Its Way!</h2>
                     <p className="text-muted text-sm mb-10 max-w-xs mx-auto leading-relaxed">
-                      Your message was prepared for WhatsApp. If it didn't open automatically, tap below.
+                      Your message should have opened in WhatsApp. If it didn't, just tap the button below and we'll get it sent.
                     </p>
                     <button
                       onClick={() => setIsSent(false)}
