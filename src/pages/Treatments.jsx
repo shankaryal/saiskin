@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { X, Clock, Tag } from 'lucide-react';
-import TreatmentCard from '../components/TreatmentCard.jsx';
+import TreatmentCard from '../components/Treatmentcard.jsx';
 import PageSEO from '../components/PageSEO.jsx';
 import PageWrapper from '../components/PageWrapper.jsx';
 import useScrollLock from '../hooks/useScrollLock.js';

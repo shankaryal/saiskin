@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { X, Clock, Tag, ArrowRight, ShieldCheck, Star, MapPin, Award } from 'lucide-react';
-import TreatmentCard from '../components/TreatmentCard.jsx';
+import TreatmentCard from '../components/Treatmentcard.jsx';
 import { featuredTreatments } from './Treatments.jsx';
 import PageSEO from '../components/PageSEO.jsx';
 import useScrollLock from '../hooks/useScrollLock.js';
