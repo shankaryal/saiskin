@@ -1,82 +1,93 @@
-import React from 'react';
 import { Mail, Phone, MapPin, Instagram, Facebook, Clock, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { CLINIC, HOURS } from '../constants';
 
+const QUICK_LINKS = [
+  { name: 'Home',       path: '/'          },
+  { name: 'Treatments', path: '/treatments'},
+  { name: 'Skincare',   path: '/skincare'  },
+  { name: 'Price List', path: '/price-list'},
+  { name: 'About Us',   path: '/about'     },
+  { name: 'Contact',    path: '/contact'   },
+];
+
+const POPULAR_TREATMENTS = [
+  { name: 'Laser Hair Removal', path: '/treatment/laser-hair-removal' },
+  { name: 'Chemical Peels',     path: '/treatment/chemical-peels'     },
+  { name: 'Bespoke Facials',    path: '/treatment/bespoke-facials'    },
+  { name: 'Skin Analyser',      path: '/treatment/skin-analyser'      },
+  { name: 'ClearLift',          path: '/treatment/clear-lift'         },
+];
+
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
-  const quickLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Treatments', path: '/treatments' },
-    { name: 'Skincare', path: '/skincare' },
-    { name: 'Price', path: '/price-list' },
-    { name: 'About Us', path: '/about' },
-    { name: 'Contact', path: '/contact' },
-  ];
-
-  const popularTreatments = [
-    { name: 'Laser Hair Removal', path: '/treatment/laser-hair-removal' },
-    { name: 'Chemical Peels', path: '/treatment/chemical-peels' },
-    { name: 'Bespoke Facials', path: '/treatment/bespoke-facials' },
-    { name: 'Skin Analyser', path: '/treatment/skin-analyser-zemits' },
-  ];
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#faf6f0] text-dark pt-20 pb-10 border-t border-gray-100" role="contentinfo">
+    <footer className="bg-dark text-cream/70 pt-20 pb-10" role="contentinfo">
       <div className="max-w-7xl mx-auto px-6">
-        
-        {/* Main Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-12 gap-12 lg:gap-8 mb-20">
-          
-          {/* Brand Identity */}
-          <div className="col-span-2 md:col-span-3 lg:col-span-4 space-y-8">
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-full overflow-hidden border border-gold/30 p-1 bg-white">
-                <img 
-                  src="images/logo.png" 
-                  alt="Sai Care Clinic Logo" 
-                  className="w-full h-full object-cover rounded-full"
+
+        {/* ── Main grid ── */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
+
+          {/* Brand */}
+          <div className="col-span-2 md:col-span-3 lg:col-span-4 space-y-7">
+            <Link to="/" className="flex items-center gap-3 group" aria-label="Sai Skin Care — Home">
+              <div className="w-12 h-12 rounded-full overflow-hidden border border-gold/40 shrink-0">
+                <img
+                  src="/images/logo.png"
+                  alt="Sai Skin Care logo"
+                  className="w-full h-full object-cover"
                 />
               </div>
               <div>
-                <div className="text-3xl font-serif font-bold tracking-tight text-dark">
-                  Sai<span className="text-gold">Care</span>
-                </div>
-                <p className="text-[10px] tracking-[0.3em] text-gray-500 font-bold uppercase">Skin & Hair Clinic</p>
+                <p className="font-serif text-2xl font-semibold text-cream leading-none">
+                  Sai <span className="text-gold">Skin Care</span>
+                </p>
+                <p className="text-[9px] tracking-[0.25em] text-gold/60 font-medium uppercase mt-1">
+                  Skin &amp; Hair
+                </p>
               </div>
-            </div>
-            <p className="text-muted leading-relaxed max-w-sm text-sm">
-              Premium aesthetic clinic in Rosyth, Dunfermline. We revolutionise your skin and hair journey using advanced FDA-approved technology and personalised care.
+            </Link>
+
+            <p className="text-sm leading-relaxed max-w-xs">
+              Premium aesthetic clinic in Rosyth, Dunfermline — delivering advanced, evidence-based skin and hair treatments using FDA-approved technology.
             </p>
-            <div className="flex gap-4">
+
+            <div className="flex gap-3">
               {[
-                { Icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
-                { Icon: Facebook, href: 'https://facebook.com', label: 'Facebook' }
+                { Icon: Instagram, href: CLINIC.instagram, label: 'Instagram' },
+                { Icon: Facebook,  href: CLINIC.facebook,  label: 'Facebook'  },
               ].map(({ Icon, href, label }) => (
-                <a 
-                  key={label} 
-                  href={href} 
+                <a
+                  key={label}
+                  href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Follow Sai Care on ${label}`}
-                  className="w-10 h-10 rounded-full border border-gold/20 flex items-center justify-center hover:bg-gold hover:text-white transition-all duration-300 bg-white"
+                  aria-label={`Follow Sai Skin Care on ${label}`}
+                  className="w-9 h-9 rounded-full border border-gold/20 flex items-center justify-center hover:bg-gold hover:border-gold hover:text-white text-cream/50 transition-all duration-300"
                 >
-                  <Icon size={18} />
+                  <Icon size={16} aria-hidden="true" />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Quick Links */}
-          <nav className="lg:col-span-2 space-y-6" aria-label="Quick links">
+          {/* Quick links */}
+          <nav className="lg:col-span-2 space-y-5" aria-label="Quick links">
             <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">Explore</h4>
-            <ul className="space-y-4" role="list">
-              {quickLinks.map((link) => (
+            <ul className="space-y-3" role="list">
+              {QUICK_LINKS.map((link) => (
                 <li key={link.name}>
-                  <Link to={link.path} className="text-muted hover:text-gold transition-colors flex items-center group text-sm">
+                  <Link
+                    to={link.path}
+                    className="text-sm hover:text-gold transition-colors flex items-center group"
+                  >
                     {link.name}
-                    <ArrowUpRight size={14} className="ml-1 opacity-0 group-hover:opacity-100 transition-all -translate-y-1 group-hover:translate-y-0" />
+                    <ArrowUpRight
+                      size={13}
+                      className="ml-1 opacity-0 group-hover:opacity-100 transition-all"
+                      aria-hidden="true"
+                    />
                   </Link>
                 </li>
               ))}
@@ -84,12 +95,12 @@ export default function Footer() {
           </nav>
 
           {/* Treatments */}
-          <nav className="lg:col-span-3 space-y-6" aria-label="Treatments">
+          <nav className="lg:col-span-3 space-y-5" aria-label="Popular treatments">
             <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">Treatments</h4>
-            <ul className="space-y-4" role="list">
-              {popularTreatments.map((item) => (
+            <ul className="space-y-3" role="list">
+              {POPULAR_TREATMENTS.map((item) => (
                 <li key={item.name}>
-                  <Link to={item.path} className="text-muted hover:text-gold transition-colors text-sm">
+                  <Link to={item.path} className="text-sm hover:text-gold transition-colors">
                     {item.name}
                   </Link>
                 </li>
@@ -97,51 +108,61 @@ export default function Footer() {
             </ul>
           </nav>
 
-          {/* Contact & Hours */}
-          <div className="col-span-2 md:col-span-1 lg:col-span-3 space-y-6">
+          {/* Contact + Hours */}
+          <div className="col-span-2 md:col-span-1 lg:col-span-3 space-y-5">
             <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">Visit Us</h4>
-            <address className="not-italic space-y-4">
+
+            <address className="not-italic space-y-4 text-sm">
               <div className="flex items-start gap-3">
-                <MapPin size={16} className="text-gold shrink-0 mt-0.5" aria-hidden="true" />
-                <span className="text-sm text-muted">
-                  {CLINIC.address.line1}, {CLINIC.address.city}<br />
+                <MapPin size={15} className="text-gold shrink-0 mt-0.5" aria-hidden="true" />
+                <span>
+                  {CLINIC.address.line1}<br />
+                  {CLINIC.address.city}<br />
                   {CLINIC.address.postcode}
                 </span>
               </div>
               <div className="flex items-center gap-3">
-                <Phone size={16} className="text-gold shrink-0" aria-hidden="true" />
-                <a href={`tel:${CLINIC.phone}`} className="text-sm text-muted hover:text-gold transition-colors">
+                <Phone size={15} className="text-gold shrink-0" aria-hidden="true" />
+                <a href={`tel:${CLINIC.phone}`} className="hover:text-gold transition-colors">
                   {CLINIC.phone}
                 </a>
               </div>
+              <div className="flex items-center gap-3">
+                <Mail size={15} className="text-gold shrink-0" aria-hidden="true" />
+                <a href={`mailto:${CLINIC.email}`} className="hover:text-gold transition-colors break-all">
+                  {CLINIC.email}
+                </a>
+              </div>
             </address>
-{/* 
-            <div className="pt-4 border-t border-gold/10">
-              <h5 className="text-[10px] font-bold uppercase tracking-[0.1em] text-dark mb-3 flex items-center gap-2">
-                <Clock size={13} /> Opening Hours
+
+            {/* Opening Hours */}
+            <div className="pt-4 border-t border-cream/10">
+              <h5 className="text-[10px] font-bold uppercase tracking-[0.15em] text-cream/50 mb-3 flex items-center gap-2">
+                <Clock size={12} aria-hidden="true" /> Opening Hours
               </h5>
               <ul className="space-y-1.5" role="list">
                 {HOURS.map(({ day, time, open }) => (
-                  <li key={day} className="flex justify-between text-[12px] gap-4">
-                    <span className={open ? 'text-dark font-medium' : 'text-gray-400'}>{day}</span>
-                    <span className={open ? 'text-muted' : 'text-gray-300 italic'}>{time}</span>
+                  <li key={day} className="flex justify-between gap-4 text-xs">
+                    <span className={open ? 'text-cream/80 font-medium' : 'text-cream/30'}>{day}</span>
+                    <span className={open ? 'text-cream/60' : 'text-cream/25 italic'}>{time}</span>
                   </li>
                 ))}
               </ul>
-            </div> */}
+            </div>
           </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="pt-8 border-t border-gold/10 flex flex-col md:flex-row justify-between items-center gap-6 text-[11px] font-bold text-gray-500 tracking-widest uppercase">
-          <p>© {currentYear} Sai Care. All Rights Reserved.</p>
+        {/* ── Bottom bar ── */}
+        <div className="pt-8 border-t border-cream/10 flex flex-col md:flex-row justify-between items-center gap-5 text-[11px] text-cream/30 tracking-wider uppercase">
+          <p>© {year} Sai Skin Care. All Rights Reserved.</p>
           <div className="flex gap-8">
             <Link to="/privacy-policy" className="hover:text-gold transition-colors">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-gold transition-colors">Terms & Conditions</Link>
+            <Link to="/terms"           className="hover:text-gold transition-colors">Terms &amp; Conditions</Link>
           </div>
-          <p className="italic hidden lg:block font-serif lowercase tracking-normal text-gold/60">Redefining Aesthetics</p>
+          <p className="font-serif italic lowercase tracking-normal text-gold/40 normal-case hidden lg:block">
+            Redefining Aesthetics
+          </p>
         </div>
-
       </div>
     </footer>
   );

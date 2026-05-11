@@ -1,23 +1,23 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronUp, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, ChevronUp, Phone } from 'lucide-react';
 import { CLINIC } from '../constants';
 
 const TREATMENT_LINKS = [
-  { label: 'Laser Hair Removal',  slug: 'laser-hair-removal'   },
-  { label: 'Chemical Peels',      slug: 'chemical-peels'       },
-  { label: 'Bespoke Facials',     slug: 'bespoke-facials'      },
-  { label: 'Skin Analyser',       slug: 'skin-analyser-zemits' },
-  { label: 'Tattoo Removal',      slug: 'tattoo-removal'       },
-  { label: 'iPixel',              slug: 'ipixel'               },
+  { label: 'Laser Hair Removal',  slug: 'laser-hair-removal'  },
+  { label: 'Chemical Peels',      slug: 'chemical-peels'      },
+  { label: 'Bespoke Facials',     slug: 'bespoke-facials'     },
+  { label: 'Skin Analyser',       slug: 'skin-analyser'       },
+  { label: 'Tattoo Removal',      slug: 'tattoo-removal'      },
+  { label: 'iPixel',              slug: 'ipixel'              },
 ];
 
 const NAV_LINKS = [
-  { label: 'Home',     to: '/'      },
-  { label: 'Skincare',  to: '/skincare'   },
-  { label: 'Price', to: '/price-list' },
-  { label: 'About',      to: '/about'      },
-  { label: 'Contact',    to: '/contact'    },
+  { label: 'Home',     to: '/'          },
+  { label: 'Skincare', to: '/skincare'  },
+  { label: 'Price',    to: '/price-list'},
+  { label: 'About',    to: '/about'     },
+  { label: 'Contact',  to: '/contact'   },
 ];
 
 export default function Navbar() {
@@ -30,14 +30,12 @@ export default function Navbar() {
   const dropRef  = useRef(null);
   const isHome   = location.pathname === '/';
 
-  /* scroll detection */
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  /* close dropdown on outside click */
   useEffect(() => {
     const handler = (e) => {
       if (dropRef.current && !dropRef.current.contains(e.target)) setDropOpen(false);
@@ -46,7 +44,6 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  /* close everything on route change */
   useEffect(() => {
     setMobileOpen(false);
     setDropOpen(false);
@@ -59,77 +56,85 @@ export default function Navbar() {
 
   const transparent = isHome && !scrolled && !mobileOpen;
 
+  const navText = (active) =>
+    transparent
+      ? active ? 'text-gold' : 'text-white/90 hover:text-white'
+      : active  ? 'text-gold' : 'text-dark hover:text-gold';
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-400 ${
         transparent
           ? 'bg-transparent'
-          : 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100'
+          : 'bg-white/96 backdrop-blur-md shadow-sm border-b border-cream-dark'
       }`}
       role="banner"
     >
-      {/* Reduced padding from px-6 to px-4 for tablets */}
-      <nav className="max-w-7xl mx-auto px-4 lg:px-10 flex items-center h-[68px]" aria-label="Main navigation">
+      <nav
+        className="max-w-7xl mx-auto px-4 lg:px-10 flex items-center h-[68px] gap-2"
+        aria-label="Main navigation"
+      >
 
-        {/* Logo - Reduced gap and font size for tablet */}
+        {/* ── Logo ── */}
         <Link
           to="/"
-          className="flex items-center gap-2 shrink-0 group"
-          aria-label="Sai Care Home"
+          className="flex items-center gap-2.5 shrink-0 group"
+          aria-label="Sai Skin Care — Home"
         >
-          <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-gold shrink-0 transition-transform group-hover:scale-105">
-            <img 
-              src="/images/logo.png" 
-              alt="" 
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-gold shrink-0 transition-transform duration-300 group-hover:scale-105">
+            <img
+              src="/images/logo.png"
+              alt="Sai Skin Care logo"
               className="w-full h-full object-cover"
             />
           </div>
-          <span 
-            className="font-serif text-xl lg:text-2xl font-semibold transition-colors"
-            style={{ color: transparent ? '#ffffff' : '#0d0d0d' }}
-          >
-            Sai<span className="text-gold">Care</span>
-          </span>
+          <div>
+            <span
+              className="font-serif text-xl lg:text-2xl font-semibold leading-none block transition-colors"
+              style={{ color: transparent ? '#ffffff' : '#0d0d0d' }}
+            >
+              Sai <span className="text-gold">Skin Care</span>
+            </span>
+            <span
+              className="text-[9px] tracking-[0.25em] font-medium uppercase block mt-0.5"
+              style={{ color: transparent ? 'rgba(255,255,255,0.6)' : '#a8832a' }}
+            >
+              Skin &amp; Hair
+            </span>
+          </div>
         </Link>
 
-        {/* Desktop links - gap-0 for tablet, gap-1 for large desktop */}
-        <ul className="hidden md:flex items-center gap-0 lg:gap-1 flex-1 justify-center" role="list">
-          
+        {/* ── Desktop nav ── */}
+        <ul
+          className="hidden md:flex items-center gap-0 lg:gap-1 flex-1 justify-center"
+          role="list"
+        >
           <li>
             <Link
               to="/"
-              className={`px-2 lg:px-4 py-2 text-sm font-medium transition-colors rounded-lg ${
-                transparent
-                  ? location.pathname === '/' ? 'text-gold' : 'text-white/90 hover:text-white'
-                  : location.pathname === '/' ? 'text-gold' : 'text-[#0d0d0d] hover:text-gold'
-              }`}
+              className={`px-3 lg:px-4 py-2 text-sm font-medium transition-colors rounded-lg ${navText(location.pathname === '/')}`}
             >
               Home
             </Link>
           </li>
 
+          {/* Treatments dropdown */}
           <li className="relative" ref={dropRef}>
             <button
               onClick={() => setDropOpen(!dropOpen)}
-              className={`flex items-center gap-1 px-2 lg:px-4 py-2 text-sm font-medium transition-colors rounded-lg ${
-                transparent
-                  ? isTreatmentActive ? 'text-gold' : 'text-white/90 hover:text-white'
-                  : isTreatmentActive ? 'text-gold'  : 'text-[#0d0d0d] hover:text-gold'
-              }`}
+              className={`flex items-center gap-1 px-3 lg:px-4 py-2 text-sm font-medium transition-colors rounded-lg ${navText(isTreatmentActive)}`}
               aria-haspopup="true"
               aria-expanded={dropOpen}
             >
               Treatments
-              {dropOpen
-                ? <ChevronUp  size={14} strokeWidth={2} />
-                : <ChevronDown size={14} strokeWidth={2} />}
+              {dropOpen ? <ChevronUp size={13} strokeWidth={2} /> : <ChevronDown size={13} strokeWidth={2} />}
             </button>
 
             {dropOpen && (
-              <div className="absolute top-full -left-0 mt-2 w-64 bg-white shadow-2xl rounded-2xl overflow-hidden z-50 border border-gray-100 transform -translate-x-1/4">
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-60 bg-white shadow-2xl rounded-2xl overflow-hidden z-50 border border-cream-dark">
                 <Link
                   to="/treatments"
-                  className="block px-6 py-4 text-[10px] font-bold tracking-[0.2em] text-gold border-b border-gray-100 hover:bg-[#faf6f0] transition-colors"
+                  className="block px-5 py-4 text-[10px] font-bold tracking-[0.2em] text-gold border-b border-cream hover:bg-cream transition-colors"
                 >
                   ALL TREATMENTS
                 </Link>
@@ -138,7 +143,7 @@ export default function Navbar() {
                     <Link
                       key={slug}
                       to={`/treatment/${slug}`}
-                      className="block px-6 py-3 text-sm font-medium text-[#0d0d0d] hover:text-gold hover:bg-[#faf6f0] transition-colors border-b border-gray-50 last:border-b-0"
+                      className="block px-5 py-3 text-sm font-medium text-dark hover:text-gold hover:bg-cream transition-colors border-b border-cream last:border-b-0"
                     >
                       {label}
                     </Link>
@@ -148,41 +153,48 @@ export default function Navbar() {
             )}
           </li>
 
-          {NAV_LINKS.filter(link => link.label !== 'Home').map(({ label, to }) => {
-            const active = location.pathname === to;
-            return (
-              <li key={to}>
-                <Link
-                  to={to}
-                  className={`px-2 lg:px-4 py-2 text-sm font-medium transition-colors rounded-lg ${
-                    transparent
-                      ? active ? 'text-gold' : 'text-white/90 hover:text-white'
-                      : active ? 'text-gold'  : 'text-[#0d0d0d] hover:text-gold'
-                  }`}
-                  aria-current={active ? 'page' : undefined}
-                >
-                  {label}
-                </Link>
-              </li>
-            );
-          })}
+          {NAV_LINKS.filter(l => l.label !== 'Home').map(({ label, to }) => (
+            <li key={to}>
+              <Link
+                to={to}
+                className={`px-3 lg:px-4 py-2 text-sm font-medium transition-colors rounded-lg ${navText(location.pathname === to)}`}
+                aria-current={location.pathname === to ? 'page' : undefined}
+              >
+                {label}
+              </Link>
+            </li>
+          ))}
         </ul>
 
-        {/* Book CTA - Smaller padding and font for tablet */}
+        {/* ── Phone (desktop, large only) ── */}
+        <a
+          href={`tel:${CLINIC.phone}`}
+          className={`hidden xl:flex items-center gap-1.5 text-xs font-medium shrink-0 transition-colors ${
+            transparent ? 'text-white/80 hover:text-white' : 'text-muted hover:text-gold'
+          }`}
+          aria-label={`Call us: ${CLINIC.phone}`}
+        >
+          <Phone size={13} aria-hidden="true" />
+          {CLINIC.phone}
+        </a>
+
+        {/* ── Book CTA ── */}
         <a
           href={CLINIC.booking}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden md:inline-flex items-center bg-gold hover:bg-gold-dark text-white text-xs lg:text-sm font-semibold px-4 lg:px-6 py-2.5 rounded-full transition-all duration-300 shrink-0 ml-2 lg:ml-6"
+          className="hidden md:inline-flex items-center bg-gold hover:bg-gold-dark text-white text-xs lg:text-sm font-semibold px-4 lg:px-6 py-2.5 rounded-full transition-all duration-300 shrink-0 ml-2"
           aria-label="Book your free consultation"
         >
           Book Now
         </a>
 
-        {/* Mobile hamburger */}
+        {/* ── Mobile hamburger ── */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className={`md:hidden ml-auto p-1.5 rounded-lg transition-colors ${transparent ? 'text-white' : 'text-[#0d0d0d]'}`}
+          className={`md:hidden ml-auto p-1.5 rounded-lg transition-colors ${
+            transparent ? 'text-white' : 'text-dark'
+          }`}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={mobileOpen}
           aria-controls="mobile-nav"
@@ -191,11 +203,11 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile menu */}
+      {/* ── Mobile menu ── */}
       <div
         id="mobile-nav"
-        className={`md:hidden bg-white border-t border-gray-100 overflow-hidden transition-all duration-300 ${
-          mobileOpen ? 'max-h-[700px] opacity-100' : 'max-h-0 opacity-0'
+        className={`md:hidden bg-white border-t border-cream-dark overflow-hidden transition-all duration-300 ${
+          mobileOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
         }`}
         aria-hidden={!mobileOpen}
       >
@@ -205,8 +217,8 @@ export default function Navbar() {
               {label === 'Home' && (
                 <Link
                   to="/"
-                  className={`block py-3.5 text-sm font-semibold border-b border-gray-50 ${
-                    location.pathname === '/' ? 'text-gold' : 'text-[#0d0d0d]'
+                  className={`block py-3.5 text-sm font-semibold border-b border-cream ${
+                    location.pathname === '/' ? 'text-gold' : 'text-dark'
                   }`}
                 >
                   Home
@@ -214,11 +226,11 @@ export default function Navbar() {
               )}
 
               {label === 'Home' && (
-                <div className="border-b border-gray-50">
+                <div className="border-b border-cream">
                   <button
                     onClick={() => setMobileTxOpen(!mobileTxOpen)}
                     className={`w-full flex items-center justify-between py-3.5 text-sm font-semibold ${
-                      isTreatmentActive ? 'text-gold' : 'text-[#0d0d0d]'
+                      isTreatmentActive ? 'text-gold' : 'text-dark'
                     }`}
                   >
                     Treatments
@@ -235,7 +247,7 @@ export default function Navbar() {
                         <li key={slug}>
                           <Link
                             to={`/treatment/${slug}`}
-                            className="block py-2 text-sm text-[#0d0d0d] hover:text-gold transition-colors"
+                            className="block py-2 text-sm text-dark hover:text-gold transition-colors"
                           >
                             {tLabel}
                           </Link>
@@ -249,8 +261,8 @@ export default function Navbar() {
               {label !== 'Home' && (
                 <Link
                   to={to}
-                  className={`block py-3.5 text-sm font-semibold border-b border-gray-50 ${
-                    location.pathname === to ? 'text-gold' : 'text-[#0d0d0d]'
+                  className={`block py-3.5 text-sm font-semibold border-b border-cream ${
+                    location.pathname === to ? 'text-gold' : 'text-dark'
                   }`}
                 >
                   {label}
@@ -259,7 +271,18 @@ export default function Navbar() {
             </li>
           ))}
 
-          <li className="pt-4 pb-2">
+          {/* Mobile phone */}
+          <li className="pt-3 pb-1">
+            <a
+              href={`tel:${CLINIC.phone}`}
+              className="flex items-center gap-2 text-sm text-muted font-medium"
+            >
+              <Phone size={15} className="text-gold" aria-hidden="true" />
+              {CLINIC.phone}
+            </a>
+          </li>
+
+          <li className="pt-2 pb-2">
             <a
               href={CLINIC.booking}
               target="_blank"
