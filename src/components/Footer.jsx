@@ -117,7 +117,7 @@ export default function Footer() {
                 <MapPin size={15} className="text-gold shrink-0 mt-0.5" aria-hidden="true" />
                 <span>
                   {CLINIC.address.line1}<br />
-                  {CLINIC.address.line}<br />
+                  {CLINIC.address.line2}<br />
                   {CLINIC.address.city}<br />
                   {CLINIC.address.postcode}
                 </span>
