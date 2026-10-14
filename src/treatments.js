@@ -49,7 +49,7 @@ export const allTreatments = [
     shortDesc: "Lie back and let the light do the work. Zero downtime, zero discomfort, and your skin will genuinely thank you for it.",
     fullDesc: "Dermalux LED Light Therapy uses clinically proven wavelengths of light to reduce inflammation, boost collagen production and accelerate skin healing. It's deeply relaxing, completely non-invasive and suits every skin type. Enjoy it as a standalone treatment or add it on to any facial or skin treatment.",
     slug: "led-light-therapy",
-    image: "/images/dermalux.webp",
+    image: "/images/ledlight.jpeg",
     duration: "15 – 30 mins",
     price: "From £25",
   },

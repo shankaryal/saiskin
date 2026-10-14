@@ -61,7 +61,7 @@ export default function Home() {
       />
 
       <section
-        className="relative min-h-screen flex items-center justify-center text-white overflow-hidden"
+        className="relative min-h-[100svh] flex flex-col justify-between text-white overflow-hidden pt-24 md:pt-32 pb-8"
         aria-labelledby="hero-heading"
       >
         <img
@@ -71,45 +71,45 @@ export default function Home() {
           fetchPriority="high"
           decoding="async"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-dark/65 via-dark/35 to-dark/20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-dark/70 via-dark/45 to-dark/60" />
 
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto my-auto py-6">
           <h1
             id="hero-heading"
-            className="font-serif text-5xl md:text-8xl font-semibold leading-[1.08] mb-7 drop-shadow-lg"
+            className="font-serif text-3xl sm:text-5xl md:text-7xl font-semibold leading-tight md:leading-[1.08] mb-4 md:mb-6 drop-shadow-lg"
           >
             You deserve to feel<br />
             <span className="italic font-light text-white/85">at home in your skin.</span>
           </h1>
 
-          <p className="text-lg md:text-xl mb-12 max-w-2xl mx-auto text-white/80 font-light leading-relaxed">
+          <p className="text-sm sm:text-base md:text-xl mb-6 md:mb-10 max-w-2xl mx-auto text-white/80 font-light leading-relaxed">
             Expert, evidence-based skin and hair treatments in a calm, caring environment in Rosyth. No rush. No pressure. Just real results.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
             <a
               href={CLINIC.booking}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center bg-gold hover:bg-gold-dark text-white px-10 py-5 rounded-2xl text-base font-semibold transition-all duration-300 shadow-xl hover:-translate-y-0.5"
+              className="w-full sm:w-auto inline-flex items-center justify-center bg-gold hover:bg-gold-dark text-white px-8 py-3.5 sm:px-10 sm:py-4 rounded-2xl text-sm sm:text-base font-semibold transition-all duration-300 shadow-xl hover:-translate-y-0.5"
             >
               Book Free Consultation
             </a>
             <Link
               to="/skincare"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/25 text-white px-10 py-5 rounded-2xl text-base font-semibold transition-all duration-300"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/25 text-white px-8 py-3.5 sm:px-10 sm:py-4 rounded-2xl text-sm sm:text-base font-semibold transition-all duration-300"
             >
               Our Treatments <ArrowRight size={17} aria-hidden="true" />
             </Link>
           </div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 py-7 px-6 bg-gradient-to-t from-dark/50 to-transparent">
-          <div className="max-w-3xl mx-auto flex flex-wrap justify-center gap-8 md:gap-14">
+        <div className="relative z-10 pt-6 px-6">
+          <div className="max-w-3xl mx-auto flex flex-wrap justify-center gap-4 sm:gap-8 md:gap-14">
             {TRUST_BADGES.map(({ icon, label }) => (
               <div
                 key={label}
-                className="flex items-center gap-2.5 text-white/80 text-[11px] uppercase tracking-widest font-bold"
+                className="flex items-center gap-2 text-white/80 text-[10px] sm:text-[11px] uppercase tracking-widest font-bold"
               >
                 <span className="text-gold">{icon}</span>
                 {label}
