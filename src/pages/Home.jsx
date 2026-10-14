@@ -2,21 +2,49 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { X, Clock, Tag, ArrowRight, ShieldCheck, Star, MapPin, Award, Quote } from 'lucide-react';
 import TreatmentCard from '../components/Treatmentcard.jsx';
-import { featuredTreatments } from './Treatments.jsx';
+import { allTreatments } from '../treatments.js';
 import PageSEO from '../components/PageSEO.jsx';
 import useScrollLock from '../hooks/useScrollLock.js';
-import { CLINIC, HOURS } from '../constants.js';
+import { CLINIC, HOURS, OFFER, ONLINE_CONSULTATION } from '../constants.js';
 
 const TRUST_BADGES = [
   { icon: <ShieldCheck size={17} aria-hidden="true" />, label: 'FDA-Approved Technology' },
-  { icon: <Award        size={17} aria-hidden="true" />, label: 'CDN Award Winner'        },
-  { icon: <Star         size={17} aria-hidden="true" />, label: 'Free Consultations'      },
+  { icon: <Award size={17} aria-hidden="true" />, label: 'CDN Award Winner' },
+  { icon: <Star size={17} aria-hidden="true" />, label: 'Free Consultations' },
 ];
 
 const STATS = [
-  { value: '10+',  label: 'Years Experience',   sub: 'Sumi has over a decade of specialist clinical experience.' },
-  { value: 'FDA',  label: 'Approved Technology', sub: 'We use only clinically proven, FDA-cleared equipment.'     },
-  { value: 'FREE', label: 'Skin Analysis',        sub: 'Start with a no-obligation skin consultation, on us.'      },
+  { value: '10+', label: 'Years Experience', sub: 'Sumi has over a decade of specialist clinical experience.' },
+  { value: 'FDA', label: 'Approved Technology', sub: 'We use only clinically proven, FDA-cleared equipment.' },
+  { value: 'FREE', label: 'Skin Analysis', sub: 'Start with a no-obligation skin consultation, on us.' },
+];
+
+const OFFERS = [
+  { big: 'FREE', title: 'Skin Analysis', sub: 'With the Zemits Skin Analyser — see what your skin needs beneath the surface.', to: '/contact' },
+  { big: 'FREE', title: 'Skin & Hair Consultation', sub: 'Expert advice, personalised for you. No pressure, no obligation.', to: '/contact' },
+  { big: '25%', title: 'Off Selected Treatments', sub: OFFER.tagline, to: '/skincare?category=Offers' },
+];
+
+const REVIEWS = [
+  { quote: "I can't recommend visiting this clinic enough. I walked in with really sore and red inflamed skin…", name: 'Erin M.', date: 'August 2026' },
+  { quote: 'I had a HydraFacial with LED therapy and my skin feels incredibly clean, hydrated, and glowing…', name: 'Juna B.', date: 'July 2026' },
+  { quote: 'Very knowledgeable and professional. I want to book for facial again.', name: 'Nicola S.', date: 'February 2026' },
+  { quote: 'Very professional and good service.', name: 'Yas S.', date: 'February 2026' },
+  {
+    quote: "Sumi is one of a kind. I was so nervous before my first laser session but she had me laughing within five minutes. Six sessions in and I've not had to shave in months. Worth every single penny.",
+    name: 'Rachel P.',
+    location: 'Dunfermline',
+  },
+  {
+    quote: "I drove 40 minutes from Edinburgh because a friend swore by Sumi. Now I'm the one telling everyone. She just looked at my skin and knew exactly what it needed. The results honestly blew me away.",
+    name: 'Amy G.',
+    location: 'Edinburgh',
+  },
+  {
+    quote: "Honest advice — she didn't try to sell me anything I didn't need. Just told me what would actually work and got on with it. Refreshing to find a clinic like that. My skin has completely transformed.",
+    name: 'Claire W.',
+    location: 'Kirkcaldy',
+  },
 ];
 
 export default function Home() {
@@ -26,27 +54,26 @@ export default function Home() {
   return (
     <>
       <PageSEO
-        title="Sai Skin Care | Advanced Skin & Hair Clinic, Rosyth Dunfermline"
-        description="Sai Skin Care in Rosyth, Dunfermline offers advanced skin and hair treatments including Laser Hair Removal, Chemical Peels, ClearLift, iPixel and Bespoke Facials. Book a free consultation today."
+        title="Sai Skin and Hair | Advanced Skin & Hair Clinic, Rosyth Dunfermline"
+        description="Sai Skin and Hair in Rosyth, Dunfermline offers advanced skin and hair treatments including Laser Hair Removal, HydraFacial, Microneedling, Meso & Cosmelan Peels and Bespoke Facials. Book a free consultation today."
         image="/images/og-image.jpg"
-        canonical="https://saiskin.vercel.app/"
+        canonical="https://saiskin.co.uk/"
       />
 
-      {/* ── Hero ── */}
       <section
         className="relative min-h-screen flex items-center justify-center text-white overflow-hidden"
         aria-labelledby="hero-heading"
       >
-        <div
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-[12s] hover:scale-105"
-          style={{ backgroundImage: 'url("/images/hm.jpg")' }}
-          role="img"
-          aria-label="Sai Skin Care clinic interior — Rosyth, Dunfermline"
+        <img
+          src="/images/hm.jpg"
+          alt="Sai Skin and Hair clinic interior — Rosyth, Dunfermline"
+          className="absolute inset-0 w-full h-full object-cover object-[72%_30%] md:object-[80%_center] lg:object-center"
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-dark/65 via-dark/35 to-dark/20" />
 
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-         
           <h1
             id="hero-heading"
             className="font-serif text-5xl md:text-8xl font-semibold leading-[1.08] mb-7 drop-shadow-lg"
@@ -69,7 +96,7 @@ export default function Home() {
               Book Free Consultation
             </a>
             <Link
-              to="/treatments"
+              to="/skincare"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/25 text-white px-10 py-5 rounded-2xl text-base font-semibold transition-all duration-300"
             >
               Our Treatments <ArrowRight size={17} aria-hidden="true" />
@@ -77,7 +104,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Trust strip */}
         <div className="absolute bottom-0 left-0 right-0 py-7 px-6 bg-gradient-to-t from-dark/50 to-transparent">
           <div className="max-w-3xl mx-auto flex flex-wrap justify-center gap-8 md:gap-14">
             {TRUST_BADGES.map(({ icon, label }) => (
@@ -93,11 +119,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Why Sai Skin Care ── */}
+      <section className="py-16 md:py-20 bg-white" aria-labelledby="offers-heading">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 id="offers-heading" className="sr-only">Current offers</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {OFFERS.map(({ big, title, sub, to }) => (
+              <Link
+                key={title}
+                to={to}
+                className="group bg-cream rounded-4xl p-8 border border-gold/20 hover:border-gold hover:shadow-xl hover:shadow-gold/10 transition-all duration-300 text-center"
+              >
+                <p className="font-serif text-5xl font-bold text-gold leading-none mb-3">{big}</p>
+                <h3 className="font-bold text-dark text-sm uppercase tracking-widest mb-2">{title}</h3>
+                <p className="text-muted text-sm leading-relaxed">{sub}</p>
+              </Link>
+            ))}
+          </div>
+          <p className="text-center text-xs text-muted mt-6">
+            Can't visit in person? <Link to="/contact#online-consultation" className="text-gold font-semibold underline underline-offset-4">Online consultation</Link> via {ONLINE_CONSULTATION.platforms} — {ONLINE_CONSULTATION.price}. · {OFFER.terms}
+          </p>
+        </div>
+      </section>
+
       <section className="py-24 md:py-32 bg-cream" aria-labelledby="why-heading">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <p className="text-gold text-xs uppercase tracking-[0.3em] font-bold mb-4">The Sai Skin Care Difference</p>
+            <p className="text-gold text-xs uppercase tracking-[0.3em] font-bold mb-4">The Sai Skin and Hair Difference</p>
             <h2 id="why-heading" className="font-serif text-4xl md:text-5xl font-semibold text-dark mb-5">
               Clinical Excellence
             </h2>
@@ -122,17 +169,18 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       <section className="py-24 md:py-32 bg-cream" aria-labelledby="treatments-heading">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
             <div className="max-w-xl">
               <p className="text-gold text-xs uppercase tracking-[0.3em] font-bold mb-4">Popular Choices</p>
               <h2 id="treatments-heading" className="font-serif text-4xl md:text-5xl font-semibold text-dark">
-                Signature Treatments
+                Our Popular Treatments
               </h2>
             </div>
             <Link
-              to="/treatments"
+              to="/skincare"
               className="hidden md:inline-flex items-center gap-2 text-gold hover:text-gold-dark font-bold text-xs uppercase tracking-widest transition-all group"
             >
               View Full Menu <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" aria-hidden="true" />
@@ -140,9 +188,9 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
-            {featuredTreatments.map((t, i) => (
+            {allTreatments.map((t) => (
               <TreatmentCard
-                key={i}
+                key={t.slug}
                 treatment={t}
                 onMoreInfo={() => setSelectedTreatment(t)}
               />
@@ -151,7 +199,7 @@ export default function Home() {
 
           <div className="mt-14 text-center">
             <Link
-              to="/treatments"
+              to="/skincare"
               className="inline-flex items-center justify-center gap-3 bg-white border-2 border-gold text-gold hover:bg-gold hover:text-white px-12 py-5 rounded-2xl text-sm font-bold uppercase tracking-widest transition-all duration-300 shadow-sm hover:shadow-gold/20 active:scale-95"
             >
               View All Treatments <ArrowRight size={17} aria-hidden="true" />
@@ -160,7 +208,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Meet Sumi teaser ── */}
       <section className="py-24 md:py-28 bg-white" aria-labelledby="sumi-heading">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -168,7 +215,7 @@ export default function Home() {
               <div className="aspect-[4/5] bg-cream rounded-5xl overflow-hidden shadow-2xl">
                 <img
                   src="/images/sumi.jpg"
-                  alt="Sumi Bhandari — founder and lead clinician at Sai Skin Care"
+                  alt="Sumi Bhandari — founder and lead clinician at Sai Skin and Hair"
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
@@ -186,7 +233,7 @@ export default function Home() {
                 Hi, I'm Sumi
               </h2>
               <p className="text-muted leading-relaxed text-base">
-                I started Sai Skin Care because I believe everyone deserves to feel confident in their own skin — and that starts with being in safe, experienced hands. With over 10 years in the industry and a degree in skin specialist care, I bring both the science and the human touch to every single treatment.
+                I started Sai Skin and Hair because I believe everyone deserves to feel confident in their own skin — and that starts with being in safe, experienced hands. With over 10 years in the industry and a degree in skin specialist care, I bring both the science and the human touch to every single treatment.
               </p>
               <p className="text-muted leading-relaxed text-base">
                 I'm proud to have been named Best Student of the Year in Scotland at the CDN Awards, but what matters most to me is that you leave feeling genuinely cared for.
@@ -202,7 +249,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Testimonials ── */}
       <section className="py-24 md:py-32 bg-cream" aria-labelledby="reviews-heading">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
@@ -211,7 +257,7 @@ export default function Home() {
               What Our Clients Say
             </h2>
             <div className="flex items-center justify-center gap-2">
-              {[1,2,3,4,5].map(s => (
+              {[1, 2, 3, 4, 5].map((s) => (
                 <Star key={s} size={18} className="text-gold fill-gold" aria-hidden="true" />
               ))}
               <span className="ml-2 text-muted text-sm font-medium">5-star rated clinic</span>
@@ -219,23 +265,7 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-7">
-            {[
-              {
-                quote: "Sumi is one of a kind. I was so nervous before my first laser session but she had me laughing within five minutes. Six sessions in and I've not had to shave in months. Worth every single penny.",
-                name: "Rachel P.",
-                location: "Dunfermline",
-              },
-              {
-                quote: "I drove 40 minutes from Edinburgh because a friend swore by Sumi. Now I'm the one telling everyone. She just looked at my skin and knew exactly what it needed. The results honestly blew me away.",
-                name: "Amy G.",
-                location: "Edinburgh",
-              },
-              {
-                quote: "Honest advice — she didn't try to sell me anything I didn't need. Just told me what would actually work and got on with it. Refreshing to find a clinic like that. My skin has completely transformed.",
-                name: "Claire W.",
-                location: "Kirkcaldy",
-              },
-            ].map(({ quote, name, location }) => (
+            {REVIEWS.map(({ quote, name, location, date }) => (
               <blockquote
                 key={name}
                 className="bg-white rounded-4xl p-8 border border-cream-dark shadow-sm flex flex-col gap-6 hover:shadow-xl hover:shadow-gold/5 transition-all duration-500"
@@ -244,13 +274,13 @@ export default function Home() {
                 <p className="text-muted leading-relaxed text-sm flex-1 italic">{quote}</p>
                 <footer className="flex items-center gap-3">
                   <div className="flex">
-                    {[1,2,3,4,5].map(s => (
+                    {[1, 2, 3, 4, 5].map((s) => (
                       <Star key={s} size={12} className="text-gold fill-gold" aria-hidden="true" />
                     ))}
                   </div>
                   <div>
                     <p className="text-dark font-semibold text-sm leading-none">{name}</p>
-                    <p className="text-muted text-xs mt-0.5">{location}</p>
+                    <p className="text-muted text-xs mt-0.5">{date || location}</p>
                   </div>
                 </footer>
               </blockquote>
@@ -259,10 +289,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Featured Treatments ── */}
-      
-
-      {/* ── Location ── */}
       <section className="py-24 md:py-32 bg-white" aria-labelledby="location-heading">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
@@ -307,7 +333,7 @@ export default function Home() {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Sai Skin Care clinic location map — 195 Queensferry Rd, Rosyth"
+                  title="Sai Skin and Hair clinic location map — 195 Queensferry Rd, Rosyth"
                 />
               </div>
             </div>
@@ -315,7 +341,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Treatment Modal ── */}
       {selectedTreatment && (
         <div
           className="fixed inset-0 z-[200] flex items-center justify-center p-4"
@@ -329,11 +354,11 @@ export default function Home() {
             aria-hidden="true"
           />
           <div className="relative bg-white rounded-5xl max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
-            <div className="relative h-64 shrink-0">
+            <div className="relative shrink-0 bg-cream">
               <img
                 src={selectedTreatment.image}
                 alt={selectedTreatment.title}
-                className="w-full h-full object-cover"
+                className="w-full h-auto max-h-[55vh] object-contain mx-auto block"
               />
               <button
                 onClick={() => setSelectedTreatment(null)}

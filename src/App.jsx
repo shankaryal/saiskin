@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { CLINIC } from './constants';
 
 import Home from './pages/Home';
-import Treatments from './pages/Treatments';
 import TreatmentDetail from './pages/TreatmentDetail';
 import Skincare from './pages/Skincare';
 import PriceList from './pages/PriceList';
@@ -13,8 +12,12 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    const target = hash && document.getElementById(hash.slice(1));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    else window.scrollTo(0, 0);
+  }, [pathname, hash]);
   return null;
 }
 
@@ -45,7 +48,7 @@ function App() {
       <main id="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/treatments" element={<Treatments />} />
+          <Route path="/treatments" element={<Navigate to="/skincare" replace />} />
           <Route path="/treatment/:slug" element={<TreatmentDetail />} />
           <Route path="/skincare" element={<Skincare />} />
           <Route path="/price-list" element={<PriceList />} />

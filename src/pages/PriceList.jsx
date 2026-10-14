@@ -2,209 +2,100 @@ import { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
 import PageSEO from '../components/PageSEO.jsx';
 import PageWrapper from '../components/PageWrapper.jsx';
-import { CLINIC } from '../constants';
+import { CLINIC, ONLINE_CONSULTATION } from '../constants';
 
 const CATEGORIES = [
   {
     id: 'consultations',
     title: "Consultations",
-    description: "Every great result starts with understanding your skin. All new clients receive a free skin analysis.",
+    description: "Every great result starts with understanding your skin and hair.",
     items: [
-      { name: "In-Clinic Consultation",  price: "£20"  },
-      { name: "Online Consultation",     price: "£20"  },
-      { name: "Skin Analyser (New Clients)", price: "FREE", highlight: true },
+      { name: "Consultation + Zemits Skin Analyser", price: "FREE", time: "30 mins" },
+      { name: "Skin & Hair Consultation",            price: "FREE", time: "30 mins" },
+      { name: `Online Consultation (${ONLINE_CONSULTATION.platforms})`, price: ONLINE_CONSULTATION.price + ".00", time: ONLINE_CONSULTATION.duration },
     ],
   },
   {
-    id: 'advanced-skin',
-    title: "Advanced Skin Treatments",
-    description: "Medical-grade facials, peels and microneedling tailored to your individual skin concerns.",
+    id: 'facial',
+    title: "Facial Treatments",
+    description: "Hydrating, resurfacing and bespoke facials tailored to your skin on the day.",
     items: [
-      { name: "Signature Facial",                  price: "£95"  },
-      { name: "Signature Facial + LED",            price: "£120" },
-      { name: "Chemical Peel",                     price: "£99"  },
-      { name: "Chemical Peel + LED",               price: "£120" },
-      { name: "Microneedling",                     price: "£110" },
-      { name: "Microneedling + LED",               price: "£130" },
-      { name: "Hydrafacial",                       price: "£110" },
-      { name: "Hydrafacial + LED",                 price: "£130" },
+      { name: "Hydra Facial + LED", price: "£145.00", time: "1 hr 30 mins" },
+      { name: "Hydra Facial", price: "£120.00", time: "1 hr 15 mins" },
+      { name: "Bespoke Facial With LED", price: "£120.00", time: "1 hr" },
+      { name: "Express Facial", price: "£60.00", time: "30 mins" },
+      { name: "Korean Glass Skin Facial", price: "£99.00", time: "1 hr" },
+      { name: "Dermaplaning with Skin Booster", price: "£65.00", time: "30 mins" },
+      { name: "Dermaplaning + Bespoke Facial", price: "£145.00", time: "1 hr 30 mins" },
+      { name: "Dermaplaning + HydraFacial", price: "£145.00", time: "1 hr 15 mins" },
+      { name: "Dermaplaning + LED", price: "£99.00", time: "1 hr" },
     ],
   },
   {
-    id: 'dermaplaning',
-    title: "Dermaplaning",
-    description: "Exfoliation and peach fuzz removal for silky-smooth skin and better product absorption.",
+    id: 'skin-advanced',
+    title: "Skin & Advanced Treatments",
+    description: "Skin analysis, microneedling, peels and LED therapy for targeted, lasting results.",
     items: [
-      { name: "Dermaplaning",                      price: "£65"  },
-      { name: "Dermaplaning + Signature Facial",   price: "£120" },
-      { name: "Dermaplaning + Hydrafacial",        price: "£130" },
+      { name: "Microneedling with Skin Booster + LED", price: "£170.00", time: "1 hr 30 mins" },
+      { name: "Microneedling + Skin Booster", price: "£145.00", time: "1 hr" },
+      { name: "HydraFacial + Microneedling + LED", price: "£249.00", time: "2 hrs" },
+      { name: "Meso Peel + LED", price: "£145.00", time: "1 hr" },
+      { name: "Cosmelan Depigmentation Programme (1 Month Treatment)", price: "£1,200.00", time: "1 hr" },
+      { name: "Cosmelan Depigmentation Programme (6 Months Treatment)", price: "£1,800.00", time: "45 mins" },
+      { name: "LED Therapy Treatment (Dermalux)", price: "£45.00", time: "30 mins" },
+      { name: "LED Therapy (Add On) Dermalux", price: "£25.00", time: "15 mins" },
+      { name: "Stretch Marks Treatment with Microneedling", price: "£145.00", time: "1 hr" },
     ],
   },
   {
-    id: 'led',
-    title: "LED Light Therapy",
-    description: "Clinically proven multi-wavelength light therapy to rejuvenate, repair and calm all skin types.",
+    id: 'skin-tag-milia',
+    title: "Skin Concerns & Removal",
+    description: "Safe, precise removal of skin tags, milia and cherry angiomas by a fully qualified clinician.",
     items: [
-      { name: "LED Light Therapy Add-On (15 min)", price: "£25" },
-      { name: "LED Light Therapy Standalone (30 min)", price: "£40" },
+      { name: "Up to 1 Skin Tag Removal", price: "£40.00", time: "15 mins" },
+      { name: "Medium Skin Tag Removal", price: "£55.00", time: "30 mins" },
+      { name: "Large Skin Tag Removal", price: "£70.00", time: "45 mins" },
+      { name: "Up to 4 Skin Tag Removal", price: "£100.00", time: "1 hr" },
+      { name: "Up to 7 Skin Tag Removal", price: "£150.00", time: "1 hr 30 mins" },
+      { name: "Milia Removal up to 3", price: "£45.00", time: "30 mins" },
+      { name: "Milia Removal up to 6", price: "£80.00", time: "45 mins" },
+      { name: "Cherry Angioma / Blood Spot Removal", price: "From £45.00" },
     ],
   },
   {
-    id: 'skin-lesion',
-    title: "Skin Lesion Removal",
-    description: "Safe, precise removal of unwanted skin lesions by a fully qualified clinician.",
+    id: 'hair-wellness',
+    title: "Hair & Wellness Treatments",
+    description: "Hair restoration and wellness programmes to support you from the inside out.",
     items: [
-      { name: "Skin Tag — Single",                 price: "£40"      },
-      { name: "Skin Tag — 3 or more",              price: "from £80" },
-      { name: "Milia — Single",                    price: "£20"      },
-      { name: "Milia — Multiple (per session)",    price: "from £50" },
-      { name: "Cherry Angioma — Single",           price: "£40"      },
-      { name: "Cherry Angioma — Multiple",         price: "from £70" },
+      { name: "Hair Loss Treatment with Exosome", price: "£145.00", time: "1 hr" },
+      { name: "Alopecia Treatment with Dutexome (Hair Restoration)", price: "£145.00", time: "1 hr" },
+      { name: "Weight Management & Wellness Programme with Unicity", price: "£148.00", time: "30 mins" },
     ],
   },
   {
-    id: 'laser-hair',
-    title: "Laser Hair Removal — Women",
-    description: "Soprano Titanium Special Edition — virtually painless, suitable for all skin types and tones.",
+    id: 'womens-laser',
+    title: "Women's Laser Hair Removal",
+    description: "Virtually painless laser hair removal, suitable for all skin types and tones.",
     items: [
-      { name: "Upper Lip",      price: "£35"  },
-      { name: "Chin",           price: "£35"  },
-      { name: "Neck",           price: "£40"  },
-      { name: "Sides of Face",  price: "£45"  },
-      { name: "Full Face",      price: "£80"  },
-      { name: "Underarm",       price: "£45"  },
-      { name: "Bikini",         price: "£60"  },
-      { name: "Half Leg",       price: "£85"  },
-      { name: "Full Leg",       price: "£120" },
-      { name: "Back",           price: "£120" },
-      { name: "Stomach",        price: "£90"  },
-      { name: "Full Body",      price: "£250", highlight: true },
+      { name: "Women's Upper Lip Laser Hair Removal", price: "£35.00", time: "30 mins" },
+      { name: "Women's Chin Laser Hair Removal", price: "£35.00" },
+      { name: "Women's Side of Face Hair Removal", price: "£45.00", time: "30 mins" },
+      { name: "Women's Full Face Hair Removal", price: "£80.00", time: "1 hr" },
+      { name: "Women's Neck Hair Removal", price: "£40.00", time: "30 mins" },
+      { name: "Women's Underarm Hair Removal", price: "£45.00", time: "45 mins" },
+      { name: "Women's Half Arm Laser Hair Removal", price: "£99.00", time: "45 mins" },
+      { name: "Women's Full Arm Laser Hair Removal", price: "£130.00", time: "45 mins" },
+      { name: "Women's Stomach Hair Removal", price: "£90.00", time: "1 hr" },
+      { name: "Women's Back Hair Removal", price: "£120.00", time: "1 hr 30 mins" },
+      { name: "Women's Bikini Hair Removal", price: "£60.00", time: "45 mins" },
+      { name: "Brazilian + Peri Anal Laser Hair Removal", price: "£95.00", time: "1 hr" },
+      { name: "Buttocks Laser Hair Removal", price: "£65.00", time: "1 hr" },
+      { name: "Women's Half Leg Hair Removal", price: "£85.00", time: "1 hr 30 mins" },
+      { name: "Women's Full Leg Hair Removal", price: "£199.00", time: "2 hrs" },
+      { name: "Women's Full Body Hair Removal", price: "£500.00", time: "3 hrs" },
     ],
   },
-  {
-    id: 'laser-packages',
-    title: "Laser Hair Removal Packages — Women",
-    description: "Course of 6 sessions for permanent, lasting hair reduction.",
-    badge: "6 Sessions",
-    items: [
-      { name: "Full Face",  price: "£420"   },
-      { name: "Underarm",   price: "£240"   },
-      { name: "Bikini",     price: "£320"   },
-      { name: "Half Leg",   price: "£450"   },
-      { name: "Full Leg",   price: "£650"   },
-      { name: "Back",       price: "£650"   },
-      { name: "Stomach",    price: "£480"   },
-      { name: "Full Body",  price: "£1,450", highlight: true },
-    ],
-  },
-  {
-    id: 'mens-laser',
-    title: "Laser Hair Removal — Men",
-    description: "Dedicated pricing for men's body and face laser hair removal.",
-    items: [
-      { name: "Beard Line / Neck",       price: "£50"  },
-      { name: "Full Face (Beard Area)",  price: "£90"  },
-      { name: "Chest",                   price: "£120" },
-      { name: "Stomach",                 price: "£100" },
-      { name: "Chest + Stomach",         price: "£180" },
-      { name: "Full Back",               price: "£140" },
-      { name: "Back + Shoulders",        price: "£160" },
-      { name: "Underarm",                price: "£50"  },
-      { name: "Full Arms",               price: "£110" },
-      { name: "Full Body",               price: "£300", highlight: true },
-    ],
-  },
-  {
-    id: 'mens-laser-packages',
-    title: "Laser Hair Removal Packages — Men",
-    description: "Course of 6 sessions — maximum results, best value.",
-    badge: "6 Sessions",
-    items: [
-      { name: "Beard Line / Neck", price: "£250"   },
-      { name: "Full Face",         price: "£480"   },
-      { name: "Chest",             price: "£650"   },
-      { name: "Stomach",           price: "£550"   },
-      { name: "Chest + Stomach",   price: "£950"   },
-      { name: "Full Back",         price: "£750"   },
-      { name: "Back + Shoulders",  price: "£850"   },
-      { name: "Underarm",          price: "£260"   },
-      { name: "Full Arms",         price: "£600"   },
-      { name: "Full Body",         price: "£1,700", highlight: true },
-    ],
-  },
-  {
-    id: 'skin-packages',
-    title: "Skin Treatment Packages",
-    description: "Course of 3 sessions for accelerated, visible results.",
-    badge: "3 Sessions",
-    items: [
-      { name: "Microneedling x3",     price: "£300" },
-      { name: "Chemical Peel x3",     price: "£270" },
-      { name: "Hydrafacial x3",       price: "£300" },
-      { name: "Signature Facial x3",  price: "£270" },
-    ],
-  },
-  {
-    id: 'advanced-courses',
-    title: "Advanced Skin Courses",
-    description: "Course of 6 sessions — the gold standard for lasting skin transformation.",
-    badge: "6 Sessions",
-    items: [
-      { name: "Microneedling",  price: "£550" },
-      { name: "Chemical Peel",  price: "£500" },
-      { name: "Hydrafacial",    price: "£550" },
-    ],
-  },
-  {
-    id: 'signature-packages',
-    title: "Signature Packages",
-    description: "Curated programmes combining multiple treatments for dramatic, lasting results.",
-    items: [
-      {
-        name:   "Glow & Glass Skin Package",
-        detail: "Hydrafacial + Dermaplaning + LED — Course of 3",
-        price:  "£350",
-        highlight: true,
-      },
-      {
-        name:   "Clear Skin & Acne Program",
-        detail: "Chemical Peel + LED — Course of 3",
-        price:  "£320",
-        highlight: true,
-      },
-      {
-        name:   "Lift & Rejuvenation Program",
-        detail: "Microneedling + LED — Course of 3",
-        price:  "£380",
-        highlight: true,
-      },
-    ],
-  },
-  {
-    id: 'hair-scalp',
-    title: "Hair & Scalp Treatments",
-    description: "Targeted treatments to restore scalp health and stimulate natural hair growth.",
-    items: [
-      {
-        name:   "Scalp Detox & Deep Clean",
-        detail: "Removes build-up, unclogs follicles and restores scalp balance",
-        price:  "£75",
-        course: { label: "Course of 3", price: "£210" },
-      },
-      {
-        name:   "Hair Growth Microneedling",
-        detail: "Stimulates circulation, increases blood flow and reactivates dormant follicles",
-        price:  "£95",
-        course: { label: "Course of 6", price: "£520" },
-      },
-      {
-        name:   "Hair Growth Microneedling + LED",
-        detail: "Microneedling combined with LED Light Therapy for enhanced regrowth results",
-        price:  "£120",
-        course: { label: "Course of 6", price: "£650" },
-      },
-    ],
-  },
+  
 ];
 
 function PriceRow({ item, index, total }) {
@@ -212,14 +103,12 @@ function PriceRow({ item, index, total }) {
   return (
     <div className={`flex items-start justify-between gap-4 py-4 ${!isLast ? 'border-b border-cream-dark' : ''}`}>
       <div className="flex-1 min-w-0">
-        <p className={`text-sm font-semibold leading-snug ${item.highlight ? 'text-dark' : 'text-dark'}`}>
+        <p className="text-sm font-semibold leading-snug text-dark">
           {item.name}
-          {item.highlight && (
-            <span className="ml-2 text-[9px] font-bold uppercase tracking-widest bg-gold/10 text-gold px-2.5 py-0.5 rounded-full align-middle">
-              Best Value
-            </span>
-          )}
         </p>
+        {item.time && (
+          <p className="text-xs text-muted mt-0.5 leading-relaxed">{item.time}</p>
+        )}
         {item.detail && (
           <p className="text-xs text-muted mt-0.5 leading-relaxed">{item.detail}</p>
         )}
@@ -323,7 +212,7 @@ function CategoryCard({ category, isOpen, onToggle, index }) {
 }
 
 export default function PriceList() {
-  const [openIds, setOpenIds] = useState(new Set(['consultations', 'advanced-skin']));
+  const [openIds, setOpenIds] = useState(new Set(['consultations', 'facial']));
 
   const toggle      = (id) => setOpenIds((prev) => {
     const next = new Set(prev);
@@ -336,15 +225,13 @@ export default function PriceList() {
   return (
     <>
       <PageSEO
-        title="Price List | Sai Skin Care — Rosyth, Dunfermline"
-        description="Transparent pricing for all Sai Skin Care treatments — Laser Hair Removal from £35, Facials from £95, Microneedling from £110, LED Light Therapy from £40. Free consultations available in Rosyth."
-        canonical="https://saiskin.vercel.app/price-list"
+        title="Price List | Sai Skin and Hair — Rosyth, Dunfermline"
+        description="Transparent pricing for all Sai Skin and Hair treatments — Laser Hair Removal from £35, Facials from £60, Microneedling from £145, LED Therapy from £25. Free skin analysis and consultations in Rosyth."
+        canonical="https://saiskin.co.uk/price-list"
       />
 
       <PageWrapper>
         <div className="bg-white">
-
-          {/* ── Hero ── */}
           <section className="pt-28 pb-16 md:pt-36 md:pb-24 bg-cream" aria-labelledby="pricing-heading">
             <div className="max-w-3xl mx-auto px-6 text-center">
               <p className="text-xs uppercase tracking-[0.3em] text-gold font-bold mb-4">Transparent Pricing</p>
@@ -357,7 +244,6 @@ export default function PriceList() {
             </div>
           </section>
 
-          {/* ── Accordion ── */}
           <section className="py-14 md:py-20 bg-white" aria-label="Treatment pricing">
             <div className="max-w-3xl mx-auto px-6">
               <div className="flex items-center justify-between mb-8">
@@ -395,7 +281,6 @@ export default function PriceList() {
             </div>
           </section>
 
-          {/* ── CTA ── */}
           <section className="py-20 md:py-28 bg-cream" aria-labelledby="consultation-cta">
             <div className="max-w-4xl mx-auto px-6">
               <div className="bg-white rounded-5xl p-10 md:p-20 text-center shadow-xl shadow-dark/5">
@@ -404,8 +289,8 @@ export default function PriceList() {
                   Not Sure Where to Start?
                 </h2>
                 <p className="text-muted text-base leading-relaxed mb-10 max-w-lg mx-auto">
-                  All prices are indicative. Sumi recommends a{' '}
-                  <strong className="text-dark font-semibold">free skin analysis</strong>{' '}
+                  Sumi recommends a{' '}
+                  <strong className="text-dark font-semibold">free skin analysis with the Zemits Skin Analyser</strong>{' '}
                   to determine the most effective treatment and accurate pricing for your unique skin goals.
                 </p>
                 <a

@@ -43,21 +43,19 @@ export default function About() {
   return (
     <>
       <PageSEO
-        title="About Sumi Bhandari | Sai Skin Care — Rosyth, Dunfermline"
-        description="Meet Sumi Bhandari — founder of Sai Skin Care in Rosyth, Dunfermline. A fully qualified, award-winning skin specialist with 10+ years experience, CDN Best Student of the Year in Scotland."
+        title="About Sumi Bhandari | Sai Skin and Hair — Rosyth, Dunfermline"
+        description="Meet Sumi Bhandari — founder of Sai Skin and Hair in Rosyth, Dunfermline. A fully qualified, award-winning skin specialist with 10+ years experience, CDN Best Student of the Year in Scotland."
         image="/images/sumi.jpg"
-        canonical="https://saiskin.vercel.app/about"
+        canonical="https://saiskin.co.uk/about"
       />
 
       <PageWrapper>
         <div className="bg-white">
-
-          {/* ── Hero ── */}
           <section className="pt-28 pb-20 md:pt-36 md:pb-28 bg-cream" aria-labelledby="about-heading">
             <div className="max-w-3xl mx-auto px-6 text-center">
               <p className="text-xs uppercase tracking-[0.3em] text-gold font-bold mb-4">Our Story</p>
               <h1 id="about-heading" className="font-serif text-4xl md:text-6xl font-semibold mb-7 text-dark">
-                About Sai Skin Care
+                About Sai Skin and Hair
               </h1>
               <p className="text-lg md:text-xl text-muted leading-relaxed font-light italic font-serif">
                 "I wanted to build a clinic where people feel properly looked after — not like they're being sold something."
@@ -65,17 +63,14 @@ export default function About() {
             </div>
           </section>
 
-          {/* ── Meet Sumi — full profile ── */}
           <section className="py-20 md:py-28 bg-white" aria-labelledby="sumi-heading">
             <div className="max-w-7xl mx-auto px-6">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-
-                {/* Photo + award badge */}
                 <div className="relative">
                   <div className="aspect-[4/5] bg-cream rounded-5xl overflow-hidden shadow-2xl">
                     <img
                       src="/images/sumi.jpg"
-                      alt="Sumi Bhandari — founder and lead skin specialist at Sai Skin Care, Rosyth"
+                      alt="Sumi Bhandari — founder and lead skin specialist at Sai Skin and Hair, Rosyth"
                       className="w-full h-full object-cover"
                       loading="lazy"
                     />
@@ -87,7 +82,6 @@ export default function About() {
                   </div>
                 </div>
 
-                {/* Biography */}
                 <div className="space-y-7 lg:pt-4">
                   <div>
                     <p className="text-gold text-xs uppercase tracking-[0.3em] font-bold mb-3">Meet Your Clinician</p>
@@ -95,7 +89,7 @@ export default function About() {
                       Sumi Bhandari
                     </h2>
                     <p className="text-[11px] uppercase tracking-[0.2em] text-muted/60 font-bold mb-7">
-                      Founder &amp; Lead Skin Specialist · Sai Skin Care
+                      Founder &amp; Lead Skin Specialist · Sai Skin and Hair
                     </p>
                   </div>
 
@@ -110,11 +104,10 @@ export default function About() {
                       Whatever brings you in — whether it's your first ever consultation or you've been coming for years — you'll get the same thing every time: Sumi's full attention, honest advice, and a treatment that's genuinely built around you.
                     </p>
                     <p className="italic font-serif text-base border-l-2 border-gold pl-5 text-dark/70">
-                      "I started Sai Skin Care because I wanted a clinic where clients feel genuinely cared for — not rushed, not sold to, just properly looked after. That's still what drives everything we do."
+                      "I started Sai Skin and Hair because I wanted a clinic where clients feel genuinely cared for — not rushed, not sold to, just properly looked after. That's still what drives everything we do."
                     </p>
                   </div>
 
-                  {/* Awards grid */}
                   <div className="grid gap-3 pt-4">
                     {AWARDS.map(({ icon, title, sub }) => (
                       <div
@@ -132,7 +125,6 @@ export default function About() {
                     ))}
                   </div>
 
-                  {/* Key stats */}
                   <dl className="grid grid-cols-3 gap-6 pt-6 border-t border-cream-dark">
                     {[
                       { value: '10+',  label: 'Years Experience' },
@@ -153,13 +145,12 @@ export default function About() {
             </div>
           </section>
 
-          {/* ── Clinic Vision ── */}
           <section className="py-16 md:py-24 bg-cream" aria-labelledby="vision-heading">
             <div className="max-w-7xl mx-auto px-6">
               <div className="max-w-3xl mx-auto text-center space-y-6">
                 <p className="text-gold text-xs uppercase tracking-[0.3em] font-bold">The Bigger Picture</p>
                 <h2 id="vision-heading" className="font-serif text-3xl md:text-4xl font-semibold text-dark">
-                  Why Sai Skin Care Exists
+                  Why Sai Skin and Hair Exists
                 </h2>
                 <p className="text-muted leading-relaxed">
                   We want to be the clinic in Fife that people actually trust — where you never feel pressured, oversold, or like just another booking in the diary. The technology matters, but it's nothing without the person behind it. That's what Sumi brings, every single time.
@@ -171,7 +162,6 @@ export default function About() {
             </div>
           </section>
 
-          {/* ── Values ── */}
           <section className="py-16 md:py-24 bg-white" aria-labelledby="values-heading">
             <div className="max-w-7xl mx-auto px-6">
               <div className="text-center mb-12">
@@ -199,7 +189,6 @@ export default function About() {
             </div>
           </section>
 
-          {/* ── CTA ── */}
           <section className="py-24 md:py-32 text-center bg-cream" aria-labelledby="cta-heading">
             <div className="max-w-2xl mx-auto px-6">
               <h2 id="cta-heading" className="font-serif text-3xl md:text-5xl font-semibold text-dark mb-5">

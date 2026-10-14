@@ -21,7 +21,7 @@ export default function PageSEO({ title, description, image, canonical }) {
     setMeta('meta[property="og:title"]', title);
     setMeta('meta[property="og:description"]', description);
     setMeta('meta[property="og:type"]', 'website');
-    setMeta('meta[property="og:site_name"]', 'Sai Skin Care');
+    setMeta('meta[property="og:site_name"]', 'Sai Skin and Hair');
 
     if (image)     setMeta('meta[property="og:image"]', image);
     if (canonical) setMeta('meta[property="og:url"]', canonical);

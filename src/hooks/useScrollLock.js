@@ -1,9 +1,5 @@
 import { useEffect } from 'react';
 
-/**
- * Locks body scroll while `isLocked` is true.
- * Saves and restores the scroll position so the page doesn't jump.
- */
 export default function useScrollLock(isLocked) {
   useEffect(() => {
     if (!isLocked) return;

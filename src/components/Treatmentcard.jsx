@@ -4,20 +4,17 @@ import { ArrowRight } from 'lucide-react';
 export default function TreatmentCard({ treatment, onMoreInfo }) {
   return (
     <article className="group relative bg-white rounded-4xl overflow-hidden border border-cream-dark hover:shadow-xl hover:shadow-gold/5 transition-all duration-500 flex flex-col">
-
-      {/* Image */}
-      <div className="relative h-56 overflow-hidden bg-cream">
+      <div className="relative aspect-[4/3] overflow-hidden bg-cream">
         <img
           src={treatment.image}
-          alt={`${treatment.title} at Sai Skin Care, Rosyth`}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          alt={`${treatment.title} at Sai Skin and Hair, Rosyth`}
+          className="w-full h-full object-contain"
           loading="lazy"
           decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
-      {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
         <h3 className="font-serif text-xl font-semibold text-dark mb-2 leading-tight group-hover:text-gold transition-colors duration-300">
           {treatment.title}
@@ -26,7 +23,6 @@ export default function TreatmentCard({ treatment, onMoreInfo }) {
           {treatment.shortDesc}
         </p>
 
-        {/* Actions */}
         <div className="flex items-center gap-3 mt-auto">
           {treatment.slug ? (
             <Link

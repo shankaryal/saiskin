@@ -1,23 +1,30 @@
 import { Mail, Phone, MapPin, Instagram, Facebook, Clock, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { CLINIC, HOURS } from '../constants';
+import { allTreatments } from '../treatments.js';
+
+const TikTokIcon = ({ size = 16, className = "" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.67 6.34 6.34 0 0 0 9.34 22a6.34 6.34 0 0 0 6.33-6.33V8.87a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-.85-.3z" />
+  </svg>
+);
 
 const QUICK_LINKS = [
   { name: 'Home',       path: '/'          },
-  { name: 'Treatments', path: '/treatments'},
   { name: 'Skincare',   path: '/skincare'  },
   { name: 'Price List', path: '/price-list'},
   { name: 'About Us',   path: '/about'     },
   { name: 'Contact',    path: '/contact'   },
 ];
 
-const POPULAR_TREATMENTS = [
-  { name: 'Laser Hair Removal', path: '/treatment/laser-hair-removal' },
-  { name: 'Chemical Peels',     path: '/treatment/chemical-peels'     },
-  { name: 'Bespoke Facials',    path: '/treatment/bespoke-facials'    },
-  { name: 'Skin Analyser',      path: '/treatment/skin-analyser'      },
-  { name: 'ClearLift',          path: '/treatment/clear-lift'         },
-];
+const POPULAR_TREATMENTS = allTreatments.map(({ title, slug }) => ({ name: title, path: `/treatment/${slug}` }));
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -25,23 +32,19 @@ export default function Footer() {
   return (
     <footer className="bg-white text-dark/75 border-t-2 border-gold/40 pt-20 pb-10" role="contentinfo">
       <div className="max-w-7xl mx-auto px-6">
-
-        {/* ── Main grid ── */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
-
-          {/* Brand */}
           <div className="col-span-2 md:col-span-3 lg:col-span-4 space-y-7">
-            <Link to="/" className="flex items-center gap-3 group" aria-label="Sai Skin Care — Home">
+            <Link to="/" className="flex items-center gap-3 group" aria-label="Sai Skin and Hair — Home">
               <div className="w-12 h-12 rounded-full overflow-hidden border border-gold/40 shrink-0">
                 <img
                   src="/images/logo.png"
-                  alt="Sai Skin Care logo"
+                  alt="Sai Skin and Hair logo"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div>
                 <p className="font-serif text-2xl font-semibold text-dark leading-none">
-                  Sai <span className="text-gold">Skin Care</span>
+                  Sai <span className="text-gold">Skin and Hair</span>
                 </p>
                 <p className="text-[9px] tracking-[0.25em] text-gold/60 font-medium uppercase mt-1">
                   Skin &amp; Hair
@@ -55,15 +58,16 @@ export default function Footer() {
 
             <div className="flex gap-3">
               {[
-                { Icon: Instagram, href: CLINIC.instagram, label: 'Instagram' },
-                { Icon: Facebook,  href: CLINIC.facebook,  label: 'Facebook'  },
+                { Icon: Instagram,   href: CLINIC.instagram, label: 'Instagram' },
+                { Icon: Facebook,    href: CLINIC.facebook,  label: 'Facebook'  },
+                { Icon: TikTokIcon,  href: CLINIC.tiktok,    label: 'TikTok'    },
               ].map(({ Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Follow Sai Skin Care on ${label}`}
+                  aria-label={`Follow Sai Skin and Hair on ${label}`}
                   className="w-9 h-9 rounded-full border border-gold/40 flex items-center justify-center hover:bg-gold hover:border-gold hover:text-white text-dark/50 transition-all duration-300"
                 >
                   <Icon size={16} aria-hidden="true" />
@@ -72,7 +76,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick links */}
           <nav className="lg:col-span-2 space-y-5" aria-label="Quick links">
             <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">Explore</h4>
             <ul className="space-y-3" role="list">
@@ -94,7 +97,6 @@ export default function Footer() {
             </ul>
           </nav>
 
-          {/* Treatments */}
           <nav className="lg:col-span-3 space-y-5" aria-label="Popular treatments">
             <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">Treatments</h4>
             <ul className="space-y-3" role="list">
@@ -108,7 +110,6 @@ export default function Footer() {
             </ul>
           </nav>
 
-          {/* Contact + Hours */}
           <div className="col-span-2 md:col-span-1 lg:col-span-3 space-y-5">
             <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">Visit Us</h4>
 
@@ -136,7 +137,6 @@ export default function Footer() {
               </div>
             </address>
 
-            {/* Opening Hours */}
             <div className="pt-4 border-t border-gold/20">
               <h5 className="text-[10px] font-bold uppercase tracking-[0.15em] text-dark/50 mb-3 flex items-center gap-2">
                 <Clock size={12} aria-hidden="true" /> Opening Hours
@@ -153,9 +153,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ── Bottom bar ── */}
         <div className="pt-8 border-t border-gold/20 flex flex-col md:flex-row justify-between items-center gap-5 text-[11px] text-dark/40 tracking-wider uppercase">
-          <p>© {year} Sai Skin Care. All Rights Reserved.</p>
+          <p>© {year} Sai Skin and Hair. All Rights Reserved.</p>
           <div className="flex gap-8">
             <Link to="/privacy-policy" className="hover:text-gold transition-colors">Privacy Policy</Link>
             <Link to="/terms"           className="hover:text-gold transition-colors">Terms &amp; Conditions</Link>

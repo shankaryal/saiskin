@@ -2,15 +2,9 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, ChevronUp, Phone } from 'lucide-react';
 import { CLINIC } from '../constants';
+import { allTreatments } from '../treatments.js';
 
-const TREATMENT_LINKS = [
-  { label: 'Laser Hair Removal',  slug: 'laser-hair-removal'  },
-  { label: 'Chemical Peels',      slug: 'chemical-peels'      },
-  { label: 'Bespoke Facials',     slug: 'bespoke-facials'     },
-  { label: 'Skin Analyser',       slug: 'skin-analyser'       },
-  { label: 'Tattoo Removal',      slug: 'tattoo-removal'      },
-  { label: 'iPixel',              slug: 'ipixel'              },
-];
+const TREATMENT_LINKS = allTreatments.map(({ title, slug }) => ({ label: title, slug }));
 
 const NAV_LINKS = [
   { label: 'Home',     to: '/'          },
@@ -51,7 +45,6 @@ export default function Navbar() {
   }, [location]);
 
   const isTreatmentActive =
-    location.pathname === '/treatments' ||
     location.pathname.startsWith('/treatment/');
 
   const transparent = isHome && !scrolled && !mobileOpen;
@@ -74,50 +67,45 @@ export default function Navbar() {
         className="max-w-7xl mx-auto px-4 lg:px-10 flex items-center h-[68px] gap-2"
         aria-label="Main navigation"
       >
-
-        {/* ── Logo ── */}
         <Link
           to="/"
           className="flex items-center gap-2.5 shrink-0 group"
-          aria-label="Sai Skin Care — Home"
+          aria-label=" Sai Skin and Hair — Home"
         >
           <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-gold shrink-0 transition-transform duration-300 group-hover:scale-105">
             <img
               src="/images/logo.png"
-              alt="Sai Skin Care logo"
+              alt=" Sai Skin and Hair logo"
               className="w-full h-full object-cover"
             />
           </div>
           <div>
             <span
-              className="font-serif text-xl lg:text-2xl font-semibold leading-none block transition-colors"
+              className="font-serif text-xl xl:text-2xl font-semibold leading-none block transition-colors"
               style={{ color: transparent ? '#ffffff' : '#0d0d0d' }}
             >
-              Sai <span className="text-gold">Skin Care</span>
+              Sai <span className="text-gold">Skin and Hair</span>
             </span>
-          
           </div>
         </Link>
 
-        {/* ── Desktop nav ── */}
         <ul
-          className="hidden md:flex items-center gap-0 lg:gap-1 flex-1 justify-center"
+          className="hidden lg:flex items-center gap-0 xl:gap-1 flex-1 justify-center min-w-0"
           role="list"
         >
           <li>
             <Link
               to="/"
-              className={`px-3 lg:px-4 py-2 text-sm font-medium transition-colors rounded-lg ${navText(location.pathname === '/')}`}
+              className={`px-2.5 xl:px-4 py-2 text-sm font-medium transition-colors rounded-lg ${navText(location.pathname === '/')}`}
             >
               Home
             </Link>
           </li>
 
-          {/* Treatments dropdown */}
           <li className="relative" ref={dropRef}>
             <button
               onClick={() => setDropOpen(!dropOpen)}
-              className={`flex items-center gap-1 px-3 lg:px-4 py-2 text-sm font-medium transition-colors rounded-lg ${navText(isTreatmentActive)}`}
+              className={`flex items-center gap-1 px-2.5 xl:px-4 py-2 text-sm font-medium transition-colors rounded-lg ${navText(isTreatmentActive)}`}
               aria-haspopup="true"
               aria-expanded={dropOpen}
             >
@@ -127,23 +115,23 @@ export default function Navbar() {
 
             {dropOpen && (
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-60 bg-white shadow-2xl rounded-2xl overflow-hidden z-50 border border-cream-dark">
-                <Link
-                  to="/treatments"
-                  className="block px-5 py-4 text-[10px] font-bold tracking-[0.2em] text-gold border-b border-cream hover:bg-cream transition-colors"
-                >
-                  ALL TREATMENTS
-                </Link>
                 <div className="py-1">
                   {TREATMENT_LINKS.map(({ label, slug }) => (
                     <Link
                       key={slug}
                       to={`/treatment/${slug}`}
-                      className="block px-5 py-3 text-sm font-medium text-dark hover:text-gold hover:bg-cream transition-colors border-b border-cream last:border-b-0"
+                      className="block px-5 py-2.5 text-sm font-medium text-dark hover:text-gold hover:bg-cream transition-colors border-b border-cream"
                     >
                       {label}
                     </Link>
                   ))}
                 </div>
+                <Link
+                  to="/skincare"
+                  className="block px-5 py-4 text-[10px] font-bold tracking-[0.2em] text-gold bg-cream/60 hover:bg-cream transition-colors"
+                >
+                  VIEW ALL TREATMENTS →
+                </Link>
               </div>
             )}
           </li>
@@ -152,7 +140,7 @@ export default function Navbar() {
             <li key={to}>
               <Link
                 to={to}
-                className={`px-3 lg:px-4 py-2 text-sm font-medium transition-colors rounded-lg ${navText(location.pathname === to)}`}
+                className={`px-2.5 xl:px-4 py-2 text-sm font-medium transition-colors rounded-lg ${navText(location.pathname === to)}`}
                 aria-current={location.pathname === to ? 'page' : undefined}
               >
                 {label}
@@ -161,7 +149,6 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* ── Phone (desktop, large only) ── */}
         <a
           href={`tel:${CLINIC.phone}`}
           className={`hidden xl:flex items-center gap-1.5 text-xs font-medium shrink-0 transition-colors ${
@@ -173,35 +160,34 @@ export default function Navbar() {
           {CLINIC.phone}
         </a>
 
-        {/* ── Book CTA ── */}
         <a
           href={CLINIC.booking}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden md:inline-flex items-center bg-gold hover:bg-gold-dark text-white text-xs lg:text-sm font-semibold px-4 lg:px-6 py-2.5 rounded-full transition-all duration-300 shrink-0 ml-2"
+          className="hidden lg:inline-flex items-center bg-gold hover:bg-gold-dark text-white text-sm font-semibold px-5 xl:px-6 whitespace-nowrap py-2.5 rounded-full transition-all duration-300 shrink-0 ml-2"
           aria-label="Book your free consultation"
         >
           Book Now
         </a>
 
-        {/* ── Mobile hamburger ── */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className={`md:hidden ml-auto p-1.5 rounded-lg transition-colors ${
-            transparent ? 'text-white' : 'text-dark'
+          className={`lg:hidden ml-auto p-2 rounded-full transition-colors ${
+            mobileOpen
+              ? 'bg-gold text-white shadow-md hover:bg-gold-dark'
+              : transparent ? 'text-white' : 'text-dark'
           }`}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={mobileOpen}
           aria-controls="mobile-nav"
         >
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          {mobileOpen ? <X size={22} strokeWidth={2.5} /> : <Menu size={22} />}
         </button>
       </nav>
 
-      {/* ── Mobile menu ── */}
       <div
         id="mobile-nav"
-        className={`md:hidden bg-white border-t border-cream-dark overflow-hidden transition-all duration-300 ${
+        className={`lg:hidden bg-white border-t border-cream-dark overflow-hidden transition-all duration-300 ${
           mobileOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
         }`}
         aria-hidden={!mobileOpen}
@@ -233,11 +219,6 @@ export default function Navbar() {
                   </button>
                   {mobileTxOpen && (
                     <ul className="pl-4 pb-3">
-                      <li>
-                        <Link to="/treatments" className="block py-2 text-[11px] font-bold tracking-widest text-gold">
-                          ALL TREATMENTS
-                        </Link>
-                      </li>
                       {TREATMENT_LINKS.map(({ label: tLabel, slug }) => (
                         <li key={slug}>
                           <Link
@@ -248,6 +229,11 @@ export default function Navbar() {
                           </Link>
                         </li>
                       ))}
+                      <li>
+                        <Link to="/skincare" className="block py-2 text-[11px] font-bold tracking-widest text-gold">
+                          VIEW ALL TREATMENTS →
+                        </Link>
+                      </li>
                     </ul>
                   )}
                 </div>
@@ -266,7 +252,6 @@ export default function Navbar() {
             </li>
           ))}
 
-          {/* Mobile phone */}
           <li className="pt-3 pb-1">
             <a
               href={`tel:${CLINIC.phone}`}

@@ -1,21 +1,21 @@
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, ChevronDown, CheckCircle2, MessageCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, ChevronDown, CheckCircle2, MessageCircle, Video } from 'lucide-react';
 import PageSEO from '../components/PageSEO.jsx';
 import PageWrapper from '../components/PageWrapper.jsx';
-import { CLINIC, HOURS } from '../constants';
+import { CLINIC, HOURS, ONLINE_CONSULTATION, whatsappLink } from '../constants';
 
 const TREATMENT_OPTIONS = [
-  { value: 'laser',     label: 'Laser Hair Removal'      },
-  { value: 'ipl',       label: 'DYE SVL / DYE VL IPL'   },
-  { value: 'peels',     label: 'Chemical Peels'           },
-  { value: 'facials',   label: 'Bespoke Facials'          },
-  { value: 'analyser',  label: 'Skin Analyser'            },
-  { value: 'clearlift', label: 'ClearLift'                },
-  { value: 'clearskin', label: 'ClearSkin'                },
-  { value: 'tattoo',    label: 'Tattoo Removal'           },
-  { value: 'ipixel',    label: 'iPixel'                   },
-  { value: 'led',       label: 'LED Light Therapy'        },
-  { value: 'other',     label: 'Other / General Enquiry'  },
+  { value: 'laser',     label: 'Laser Hair Removal'       },
+  { value: 'peels',     label: 'Meso Peel / Cosmelan' },
+  { value: 'facials',   label: 'Bespoke Facials'           },
+  { value: 'analyser',  label: 'Free Skin Analysis / Consultation' },
+  { value: 'online',    label: 'Online Consultation (£20)' },
+  { value: 'micro',     label: 'Microneedling'             },
+  { value: 'skintag',   label: 'Skin Tag, Milia & Cherry Angioma Removal' },
+  { value: 'hair',      label: 'Hair Loss / Alopecia'      },
+  { value: 'wellness',  label: 'Weight Management & Wellness' },
+  { value: 'led',       label: 'LED Light Therapy'         },
+  { value: 'other',     label: 'Other / General Enquiry'   },
 ];
 
 export default function Contact() {
@@ -30,7 +30,7 @@ export default function Contact() {
     const message   = data.get('message')   || '';
 
     const text = encodeURIComponent(
-      `Hello Sai Skin Care,\n\n*New Enquiry*\n- Name: ${name}\n- Email: ${email}\n- Treatment: ${treatment}\n- Message: ${message}`
+      `Hello Sai Skin and Hair,\n\n*New Enquiry*\nName: ${name}\nEmail: ${email}\nTreatment: ${treatment}\nMessage: ${message}`
     );
     window.open(`https://wa.me/${CLINIC.whatsapp}?text=${text}`, '_blank');
     setIsSent(true);
@@ -39,15 +39,13 @@ export default function Contact() {
   return (
     <>
       <PageSEO
-        title="Contact Sai Skin Care | Book a Free Consultation — Rosyth, Dunfermline"
-        description={`Contact Sai Skin Care at ${CLINIC.address.full}. Book a free consultation or ask about our treatments. Call ${CLINIC.phone} or message us on WhatsApp.`}
-        canonical="https://saiskin.vercel.app/contact"
+        title="Contact Sai Skin and Hair | Book a Free Consultation — Rosyth, Dunfermline"
+        description={`Contact Sai Skin and Hair at ${CLINIC.address.full}. Book a free consultation or ask about our treatments. Call ${CLINIC.phone} or message us on WhatsApp.`}
+        canonical="https://saiskin.co.uk/contact"
       />
 
       <PageWrapper>
         <div className="bg-white">
-
-          {/* ── Hero ── */}
           <section className="pt-28 pb-14 md:pt-36 md:pb-20 bg-cream text-center" aria-labelledby="contact-heading">
             <div className="max-w-3xl mx-auto px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-gold font-bold mb-4">Say Hello</p>
@@ -60,17 +58,13 @@ export default function Contact() {
             </div>
           </section>
 
-          {/* ── Main grid ── */}
           <div className="max-w-7xl mx-auto px-6 py-14 md:py-24">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-
-              {/* Left — clinic info */}
               <div className="space-y-10">
                 <div>
                   <h2 className="font-serif text-2xl font-semibold text-dark mb-8">Come and See Us</h2>
 
                   <address className="not-italic space-y-6">
-                    {/* Location */}
                     <div className="flex items-start gap-5">
                       <div className="w-10 h-10 rounded-full border border-gold/30 flex items-center justify-center shrink-0 bg-cream">
                         <MapPin size={17} className="text-gold" aria-hidden="true" />
@@ -90,7 +84,6 @@ export default function Contact() {
                       </div>
                     </div>
 
-                    {/* Phone */}
                     <div className="flex items-start gap-5">
                       <div className="w-10 h-10 rounded-full border border-gold/30 flex items-center justify-center shrink-0 bg-cream">
                         <Phone size={17} className="text-gold" aria-hidden="true" />
@@ -103,7 +96,6 @@ export default function Contact() {
                       </div>
                     </div>
 
-                    {/* WhatsApp */}
                     <div className="flex items-start gap-5">
                       <div className="w-10 h-10 rounded-full border border-gold/30 flex items-center justify-center shrink-0 bg-cream">
                         <MessageCircle size={17} className="text-gold" aria-hidden="true" />
@@ -121,7 +113,6 @@ export default function Contact() {
                       </div>
                     </div>
 
-                    {/* Email */}
                     <div className="flex items-start gap-5">
                       <div className="w-10 h-10 rounded-full border border-gold/30 flex items-center justify-center shrink-0 bg-cream">
                         <Mail size={17} className="text-gold" aria-hidden="true" />
@@ -134,7 +125,6 @@ export default function Contact() {
                       </div>
                     </div>
 
-                    {/* Hours */}
                     <div className="flex items-start gap-5 pt-2">
                       <div className="w-10 h-10 rounded-full border border-gold/30 flex items-center justify-center shrink-0 bg-cream">
                         <Clock size={17} className="text-gold" aria-hidden="true" />
@@ -154,7 +144,6 @@ export default function Contact() {
                   </address>
                 </div>
 
-                {/* Direct booking strip */}
                 <div className="bg-cream border border-cream-dark rounded-3xl p-8">
                   <h3 className="font-serif text-xl font-semibold text-dark mb-3">Skip the Queue</h3>
                   <p className="text-muted text-sm mb-6 leading-relaxed">
@@ -169,9 +158,40 @@ export default function Contact() {
                     Book Online Now
                   </a>
                 </div>
+
+                <div id="online-consultation" className="scroll-mt-28 bg-white border border-gold/30 rounded-3xl p-8">
+                  <div className="flex items-start justify-between gap-4 mb-3">
+                    <h3 className="font-serif text-xl font-semibold text-dark flex items-center gap-2">
+                      <Video size={19} className="text-gold" aria-hidden="true" /> Online Consultation
+                    </h3>
+                    <span className="font-serif text-2xl font-bold text-gold leading-none shrink-0">{ONLINE_CONSULTATION.price}</span>
+                  </div>
+                  <p className="text-muted text-sm mb-5 leading-relaxed">
+                    Can't make it to the clinic? Have a {ONLINE_CONSULTATION.duration} video consultation with Sumi via {ONLINE_CONSULTATION.platforms}.
+                  </p>
+                  <ol className="space-y-3 mb-6">
+                    {[
+                      'Message us on WhatsApp with your preferred date and time.',
+                      'Sumi confirms your slot and payment details on WhatsApp.',
+                      'Once confirmed, you receive your private Zoom / Google Meet link — just tap it to join.',
+                    ].map((step, i) => (
+                      <li key={i} className="flex items-start gap-3 text-sm text-muted leading-relaxed">
+                        <span className="shrink-0 w-6 h-6 rounded-full bg-gold/10 text-gold text-xs font-bold flex items-center justify-center">{i + 1}</span>
+                        {step}
+                      </li>
+                    ))}
+                  </ol>
+                  <a
+                    href={whatsappLink(ONLINE_CONSULTATION.whatsappMessage)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold-dark text-white text-xs font-bold uppercase tracking-widest px-8 py-4 rounded-xl transition-all shadow-md hover:shadow-gold/20"
+                  >
+                    <MessageCircle size={16} aria-hidden="true" /> Book via WhatsApp
+                  </a>
+                </div>
               </div>
 
-              {/* Right — contact form */}
               <div className="border border-cream-dark rounded-5xl p-8 md:p-12 bg-white shadow-xl shadow-dark/5">
                 {!isSent ? (
                   <>
@@ -265,11 +285,10 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* ── Map ── */}
           <div className="max-w-7xl mx-auto px-6 pb-24">
             <div className="w-full h-[420px] rounded-5xl overflow-hidden shadow-2xl border border-cream-dark">
               <iframe
-                title="Sai Skin Care clinic location — 195 Queensferry Rd, Rosyth"
+                title="Sai Skin and Hair clinic location — 195 Queensferry Rd, Rosyth"
                 src={CLINIC.mapsEmbed}
                 width="100%"
                 height="100%"
